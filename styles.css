@@ -234,7 +234,7 @@ body {
 .top10-item::before {
 	content: attr(data-rank);
 	position: absolute;
-	left: -80px;
+	left: -70px;
 	font-weight: 900;
 	font-size: 300px;
 	line-height: 0.9;
