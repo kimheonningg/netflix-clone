@@ -35,11 +35,43 @@ body {
 	color: #fff;
 	text-decoration: none;
 	font-size: 14px;
+	opacity: 0.9;
+	transition: transform 0.2s ease, opacity 0.2s ease;
+	display: inline-block;
 }
 
-.icons span {
-	margin-left: 15px;
+.nav a:hover {
+	opacity: 1;
+	transform: scale(1.1);
+}
+
+.icon-btn {
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: inherit;
+}
+
+.icon-btn:hover .material-symbols-outlined {
+	opacity: 1;
+	transform: scale(1.1);
+}
+
+.material-symbols-outlined {
+	font-size: 26px;
+	opacity: 0.9;
+	transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.icons {
+	display: flex;
+	gap: 15px;
+	align-items: center;
 }
 
 /* Hero Section */
@@ -90,6 +122,15 @@ body {
 	display: flex;
 	align-items: center;
 	gap: 5px;
+	border: none;
+	border-radius: 4px;
+	padding: 10px 20px;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.play:hover {
+	background: #e6e6e6;
 }
 
 .info {
@@ -99,6 +140,15 @@ body {
 	display: flex;
 	align-items: center;
 	gap: 5px;
+	border: none;
+	border-radius: 4px;
+	padding: 10px 20px;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.info:hover {
+	background: rgba(109, 109, 110, 0.9);
 }
 
 /* Rows */
