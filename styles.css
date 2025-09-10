@@ -206,19 +206,60 @@ body {
 }
 
 /* Top 10 */
-.top10 {
-	display: flex;
-	gap: 20px;
+.top10-section {
+	padding: 24px 50px;
+}
+.top10-section h2 {
+	margin-bottom: 16px;
+	font-size: 24px;
+}
+.top10-section h2 strong {
+	font-weight: 800;
 }
 
-.top-card {
-	width: 120px;
-	height: 180px;
-	background: #333;
+.top10-list {
+	list-style: none;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 48px;
-	font-weight: bold;
-	border-radius: 5px;
+	gap: 32px;
+	counter-reset: rank;
+	position: relative;
+}
+
+.top10-item {
+	position: relative;
+	display: flex;
+	align-items: flex-end;
+}
+
+.top10-item::before {
+	content: attr(data-rank);
+	position: absolute;
+	left: -80px;
+	font-weight: 900;
+	font-size: 300px;
+	line-height: 0.9;
+	color: transparent;
+	-webkit-text-stroke: 10px rgba(255, 255, 255, 0.16);
+	text-stroke: 10px rgba(255, 255, 255, 0.16);
+	pointer-events: none;
+}
+
+.poster-wrap {
+	position: relative;
+	z-index: 1;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+}
+
+.poster-23 {
+	width: 180px;
+	height: 270px;
+	object-fit: cover;
+	display: block;
+}
+
+.poster-wrap:hover {
+	transform: translateY(-2px);
+	transition: transform 0.2s ease;
 }
