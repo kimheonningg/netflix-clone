@@ -81,7 +81,7 @@ body {
 .notif-dropdown {
 	position: absolute;
 	right: 0;
-	top: 50px;
+	top: 30px;
 	width: 380px;
 	background: rgba(20, 20, 20, 0.95);
 	border-radius: 8px;
@@ -149,7 +149,7 @@ body {
 .profile-dropdown {
 	position: absolute;
 	right: 0;
-	top: 42px;
+	top: 30px;
 	width: 280px;
 	background: rgba(20, 20, 20, 0.95);
 	border: 1px solid rgba(255, 255, 255, 0.12);
