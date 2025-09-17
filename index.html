@@ -27,9 +27,41 @@
 				<button class="icon-btn" aria-label="검색">
 					<span class="material-symbols-outlined">search</span>
 				</button>
-				<button class="icon-btn" aria-label="알림">
+				<div class="icon-btn notif" aria-label="알림">
 					<span class="material-symbols-outlined">notifications</span>
-				</button>
+					<div class="notif-dropdown">
+						<ul>
+							<li>
+								<img src="assets/runningman.png" alt="알림1" />
+								<div class="notif-text">
+									<p class="notif-title">9월 12일 공개</p>
+									<p class="notif-desc">지금 예고편을 시청하세요</p>
+								</div>
+							</li>
+							<li>
+								<img src="assets/runningman.png" alt="알림2" />
+								<div class="notif-text">
+									<p class="notif-title">넷플릭스 '신규 콘텐츠 가이드'</p>
+									<p class="notif-desc">공개 예정작을 살펴보세요</p>
+								</div>
+							</li>
+							<li>
+								<img src="assets/runningman.png" alt="알림3" />
+								<div class="notif-text">
+									<p class="notif-title">신규 콘텐츠</p>
+									<p class="notif-desc">나는 생존자다</p>
+								</div>
+							</li>
+							<li>
+								<img src="assets/runningman.png" alt="알림4" />
+								<div class="notif-text">
+									<p class="notif-title">웬즈데이 시즌 2</p>
+									<p class="notif-desc">손맛이 다른 세계가 온다</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
 				<button class="icon-btn" aria-label="프로필">
 					<span class="material-symbols-outlined">account_circle</span>
 				</button>
@@ -123,5 +155,32 @@
 				</li>
 			</ol>
 		</section>
+		<script type="module">
+			function initNotifDropdown() {
+				const notif = document.querySelector(".notif");
+				if (!notif) return;
+				const dropdown = notif.querySelector(".notif-dropdown");
+				if (!dropdown) return;
+
+				notif.addEventListener("mouseenter", () =>
+					dropdown.classList.add("active")
+				);
+				notif.addEventListener("mouseleave", () =>
+					dropdown.classList.remove("active")
+				);
+
+				notif.addEventListener("focusin", () =>
+					dropdown.classList.add("active")
+				);
+				notif.addEventListener("focusout", (e) => {
+					if (!notif.contains(e.relatedTarget))
+						dropdown.classList.remove("active");
+				});
+			}
+
+			window.addEventListener("DOMContentLoaded", () => {
+				initNotifDropdown();
+			});
+		</script>
 	</body>
 </html>

@@ -16,7 +16,7 @@ Material UI icons are used for this project
 
 ### Checkpoint
 
-- 알람 hover 시 모달 노출
+- 알람 hover 시 모달 노출 V
 - 프로필 hover 시 모달 노출
 - 카드형 콘텐츠 무한 Carousel 구현
 - pagination
