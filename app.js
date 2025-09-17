@@ -245,3 +245,146 @@ document.addEventListener("DOMContentLoaded", () => {
 		.querySelectorAll("[data-carousel]")
 		.forEach((root) => new InfiniteCarousel(root));
 });
+
+// TOP10
+(function enhanceTop10() {
+	const sec = document.querySelector(".top10-section");
+	const list = sec?.querySelector(".top10-list");
+	if (!sec || !list) return;
+
+	// 캐러셀 행처럼 동작(버튼/페이징 스타일 재사용)
+	sec.classList.add("carousel-row");
+	sec.style.position = "relative";
+
+	// 뷰포트 래퍼
+	const viewport = document.createElement("div");
+	viewport.style.position = "relative";
+	viewport.style.overflow = "hidden";
+	viewport.style.width = "100%";
+	list.parentNode.insertBefore(viewport, list);
+	viewport.appendChild(list);
+
+	// 트랙 애니메이션
+	list.style.willChange = "transform";
+	list.style.transition = "transform 0.45s ease";
+
+	const originalItems = Array.from(list.children);
+	const n = originalItems.length;
+	const pageSize = 5; // 고정: 5개씩
+	const totalPages = Math.max(1, Math.ceil(n / pageSize));
+
+	// 컨트롤 & 페이징
+	const prev = document.createElement("button");
+	prev.className = "cr-btn prev";
+	prev.setAttribute("aria-label", "이전");
+	prev.innerHTML = "&#10094;";
+	const next = document.createElement("button");
+	next.className = "cr-btn next";
+	next.setAttribute("aria-label", "다음");
+	next.innerHTML = "&#10095;";
+	sec.appendChild(prev);
+	sec.appendChild(next);
+
+	const pagi = document.createElement("div");
+	pagi.className = "cr-pagination";
+	for (let i = 0; i < totalPages; i++) {
+		const bar = document.createElement("span");
+		bar.className = "bar";
+		pagi.appendChild(bar);
+	}
+	sec.appendChild(pagi);
+	const bars = Array.from(pagi.children);
+
+	// === 무한 루프용 앞/뒤 클론 삽입 ===
+	// 뒤(마지막) 페이지 클론을 앞에, 앞(첫) 페이지 클론을 뒤에 추가
+	const lastPageStart = Math.max(0, (totalPages - 1) * pageSize);
+	const headClones = originalItems
+		.slice(lastPageStart)
+		.map((el) => el.cloneNode(true));
+	headClones.forEach((node) => list.insertBefore(node, list.firstChild));
+	const tailClones = originalItems
+		.slice(0, pageSize)
+		.map((el) => el.cloneNode(true));
+	tailClones.forEach((node) => list.appendChild(node));
+
+	// 확장된 아이템으로 좌표 측정
+	let allItems = Array.from(list.children);
+	let baseX = allItems[0]?.offsetLeft || 0;
+
+	// 확장 인덱스(페이지 시작 위치): [ headClone, ...original pages..., tailClone ]
+	const STEP = pageSize;
+	const MIN_EXT = 0; // 앞쪽 클론 페이지 시작
+	const FIRST_REAL_EXT = STEP * 1; // 첫 실 페이지 시작
+	const LAST_REAL_EXT = STEP * totalPages;
+	const MAX_EXT = STEP * (totalPages + 1); // 뒤쪽 클론 페이지 시작
+
+	let logicalPage = 0; // 0..totalPages-1
+	let extIndex = FIRST_REAL_EXT; // 확장 인덱스 기준 시작점
+	let isAnimating = false;
+
+	function translateTo(start, animated = true) {
+		if (!animated) list.style.transition = "none";
+		const targetX = allItems[start]?.offsetLeft || 0;
+		list.style.transform = `translateX(${-(targetX - baseX)}px)`;
+		if (!animated) {
+			list.offsetHeight; // reflow
+			list.style.transition = "transform 0.45s ease";
+		}
+	}
+
+	function updatePagi() {
+		bars.forEach((b, i) => b.classList.toggle("active", i === logicalPage));
+	}
+
+	function nextPage() {
+		if (isAnimating || totalPages <= 1) return;
+		isAnimating = true;
+		logicalPage = (logicalPage + 1) % totalPages;
+		extIndex += STEP; // 항상 오른쪽으로 이동
+		translateTo(extIndex, true);
+	}
+
+	function prevPage() {
+		if (isAnimating || totalPages <= 1) return;
+		isAnimating = true;
+		logicalPage = (logicalPage - 1 + totalPages) % totalPages;
+		extIndex -= STEP; // 항상 왼쪽으로 이동
+		translateTo(extIndex, true);
+	}
+
+	// 끝/처음에서 시접 점프(transition 없이 즉시 보정)
+	list.addEventListener("transitionend", () => {
+		isAnimating = false;
+		if (extIndex === MAX_EXT) {
+			// 마지막 실 페이지 다음(뒤쪽 클론)에 도착 → 첫 실 페이지로 무음 점프
+			extIndex = FIRST_REAL_EXT;
+			translateTo(extIndex, false);
+		} else if (extIndex === MIN_EXT) {
+			// 첫 실 페이지 이전(앞쪽 클론)에 도착 → 마지막 실 페이지로 무음 점프
+			extIndex = LAST_REAL_EXT;
+			translateTo(extIndex, false);
+		}
+		updatePagi();
+	});
+
+	prev.addEventListener("click", prevPage);
+	next.addEventListener("click", nextPage);
+
+	// 리사이즈 시 현재 위치 유지
+	window.addEventListener("resize", () => {
+		allItems = Array.from(list.children);
+		baseX = allItems[0]?.offsetLeft || 0;
+		translateTo(extIndex, false);
+	});
+
+	// 아이템이 5개 이하이면 컨트롤 숨김
+	if (totalPages <= 1) {
+		prev.style.display = "none";
+		next.style.display = "none";
+		pagi.style.display = "none";
+	}
+
+	// 초기 스냅
+	translateTo(extIndex, false);
+	updatePagi();
+})();
