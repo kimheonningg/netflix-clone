@@ -62,8 +62,51 @@
 						</ul>
 					</div>
 				</div>
-				<button class="icon-btn" aria-label="프로필">
+				<button class="icon-btn profile" aria-label="프로필">
 					<span class="material-symbols-outlined">account_circle</span>
+
+					<div class="profile-dropdown" role="menu" aria-hidden="true">
+						<div class="caret"></div>
+						<ul class="profile-list">
+							<li class="profile-item">
+								<img src="assets/runningman.png" alt="사용자1" class="avatar" />
+								<span>사용자1</span>
+							</li>
+							<li class="profile-item">
+								<img src="assets/runningman.png" alt="사용자2" class="avatar" />
+								<span>사용자2</span>
+							</li>
+							<li class="profile-item">
+								<img src="assets/runningman.png" alt="키즈" class="avatar" />
+								<span>키즈</span>
+							</li>
+
+							<li class="divider" role="separator"></li>
+
+							<li class="menu-item">
+								<span class="material-symbols-outlined">edit</span>
+								<span>프로필 관리</span>
+							</li>
+							<li class="menu-item">
+								<span class="material-symbols-outlined">switch_account</span>
+								<span>프로필 이전</span>
+							</li>
+							<li class="menu-item">
+								<span class="material-symbols-outlined"
+									>settings_account_box</span
+								>
+								<span>계정</span>
+							</li>
+							<li class="menu-item">
+								<span class="material-symbols-outlined">help</span>
+								<span>고객 센터</span>
+							</li>
+
+							<li class="divider" role="separator"></li>
+
+							<li class="logout">넷플릭스에서 로그아웃</li>
+						</ul>
+					</div>
 				</button>
 			</div>
 		</header>
@@ -155,32 +198,5 @@
 				</li>
 			</ol>
 		</section>
-		<script type="module">
-			function initNotifDropdown() {
-				const notif = document.querySelector(".notif");
-				if (!notif) return;
-				const dropdown = notif.querySelector(".notif-dropdown");
-				if (!dropdown) return;
-
-				notif.addEventListener("mouseenter", () =>
-					dropdown.classList.add("active")
-				);
-				notif.addEventListener("mouseleave", () =>
-					dropdown.classList.remove("active")
-				);
-
-				notif.addEventListener("focusin", () =>
-					dropdown.classList.add("active")
-				);
-				notif.addEventListener("focusout", (e) => {
-					if (!notif.contains(e.relatedTarget))
-						dropdown.classList.remove("active");
-				});
-			}
-
-			window.addEventListener("DOMContentLoaded", () => {
-				initNotifDropdown();
-			});
-		</script>
 	</body>
 </html>

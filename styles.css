@@ -74,6 +74,10 @@ body {
 	align-items: center;
 }
 
+.notif {
+	position: relative;
+}
+
 .notif-dropdown {
 	position: absolute;
 	right: 0;
@@ -88,7 +92,8 @@ body {
 	transition: opacity 0.2s ease;
 }
 
-.notif-dropdown.active {
+.notif:hover .notif-dropdown,
+.notif:focus-within .notif-dropdown {
 	opacity: 1;
 	pointer-events: auto;
 }
@@ -135,6 +140,107 @@ body {
 .notif-desc {
 	font-size: 12px;
 	color: #bbb;
+}
+
+.profile {
+	position: relative;
+}
+
+.profile-dropdown {
+	position: absolute;
+	right: 0;
+	top: 42px;
+	width: 280px;
+	background: rgba(20, 20, 20, 0.95);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 8px;
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.18s ease;
+	padding: 8px 0;
+	z-index: 20;
+}
+
+.profile-dropdown .caret {
+	position: absolute;
+	right: 18px;
+	top: -8px;
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 8px solid rgba(20, 20, 20, 0.95);
+}
+
+.profile:hover .profile-dropdown,
+.profile:focus-within .profile-dropdown {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.profile-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.profile-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 14px;
+	cursor: pointer;
+}
+.profile-item:hover {
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.avatar {
+	width: 36px;
+	height: 36px;
+	border-radius: 6px;
+	object-fit: cover;
+	flex-shrink: 0;
+}
+
+.profile-item span {
+	font-size: 14px;
+	color: #fff;
+}
+
+.divider {
+	height: 1px;
+	margin: 8px 0;
+	background: rgba(255, 255, 255, 0.14);
+}
+
+.menu-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 14px;
+	cursor: pointer;
+	color: #e6e6e6;
+	font-size: 14px;
+}
+.menu-item .material-symbols-outlined {
+	font-size: 20px;
+	opacity: 0.9;
+}
+.menu-item:hover {
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.logout {
+	padding: 14px;
+	text-align: center;
+	color: #fff;
+	opacity: 0.9;
+	cursor: pointer;
+}
+.logout:hover {
+	background: rgba(255, 255, 255, 0.08);
 }
 
 /* Hero Section */
