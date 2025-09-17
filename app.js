@@ -10,122 +10,209 @@ document.addEventListener("DOMContentLoaded", () => {
 			this.originalSlides = Array.from(this.track.children);
 			this.n = this.originalSlides.length;
 
-			// 설정
 			this.gap = this._readGap();
 			this.cardWidth = this._slideWidth();
-			this.step = this.cardWidth + this.gap; // 1장씩 이동
-			this.index = 0; // 실제 사용은 startIndex로 보정
+			this.step = this.cardWidth + this.gap;
 
-			// 무한루프: 앞/뒤에 원본 전체를 한 번씩 복제 (총 3n 장)
-			this._makeClones();
+			/* --- pagination 요소 동적 생성 --- */
+			this.pagi = document.createElement("div");
+			this.pagi.className = "cr-pagination";
+			this.root.appendChild(this.pagi);
 
-			// 시작 위치: 첫 원본의 인덱스 = n
-			this.current = this.n;
-			this._jumpWithoutAnim(this.current);
+			this._cloneHeadAndTail(); // 3n 구성
+			this.current = this.n; // 중앙에서 시작
+			this._jump(this.current);
 
-			// 이벤트
+			this._computeLayout(); // itemsPerView / totalPages 계산
+			this._buildPagination(); // 바 그리기
+			this._updatePaginationActive(); // 활성 바 표시
+
 			this._bind();
 			window.addEventListener("resize", this._onResize);
 		}
 
+		/* ---------- utilities ---------- */
 		_readGap() {
-			const g = getComputedStyle(this.track).gap || "16px";
-			const v = parseFloat(g);
-			return Number.isNaN(v) ? 16 : v;
+			return parseFloat(getComputedStyle(this.track).gap || "16") || 16;
 		}
-
 		_slideWidth() {
-			const first = this.track.querySelector(".cr-card");
-			return first.getBoundingClientRect().width;
+			return this.track.querySelector(".cr-card").getBoundingClientRect().width;
 		}
 
-		_makeClones() {
-			const frontClones = this.originalSlides.map((s) => s.cloneNode(true));
-			const backClones = this.originalSlides.map((s) => s.cloneNode(true));
+		_cloneHeadAndTail() {
+			const head = this.originalSlides.map((n) => n.cloneNode(true));
+			const tail = this.originalSlides.map((n) => n.cloneNode(true));
+			for (let i = this.n - 1; i >= 0; i--) this.track.prepend(head[i]);
+			tail.forEach((n) => this.track.appendChild(n));
+			this.allSlides = Array.from(this.track.children);
+		}
 
-			// 앞에는 원본의 "마지막부터" 오도록 prepend 순서 보장
-			for (let i = this.n - 1; i >= 0; i--) {
-				this.track.prepend(frontClones[i]);
+		_translate(i, animated = true) {
+			if (!animated) this.track.style.transition = "none";
+			this.track.style.transform = `translateX(${-(i * this.step)}px)`;
+			if (!animated) {
+				this.track.offsetHeight;
+				this.track.style.transition = "";
 			}
-			// 뒤에는 원본 순서 그대로
-			backClones.forEach((c) => this.track.appendChild(c));
-
-			this.allSlides = Array.from(this.track.children); // 길이 = 3n
+		}
+		_jump(i) {
+			this._translate(i, false);
 		}
 
+		/* ---------- pagination ---------- */
+		_computeLayout() {
+			const vw = this.viewport.clientWidth;
+			const unit = this.cardWidth + this.gap;
+			this.itemsPerView = Math.max(1, Math.floor((vw + this.gap) / unit));
+			this.totalPages = Math.max(1, Math.ceil(this.n / this.itemsPerView));
+		}
+
+		_buildPagination() {
+			// 필요 시 재빌드
+			if (this.pagi.dataset.count == this.totalPages) return;
+			this.pagi.replaceChildren();
+			for (let i = 0; i < this.totalPages; i++) {
+				const b = document.createElement("span");
+				b.className = "bar";
+				this.pagi.appendChild(b);
+			}
+			this.pagi.dataset.count = String(this.totalPages);
+			this.pagiBars = Array.from(this.pagi.children);
+		}
+
+		_logicalIndex() {
+			// current를 원본 범위 [0..n-1]로 환산
+			const raw = this.current - this.n;
+			return ((raw % this.n) + this.n) % this.n;
+		}
+
+		_currentPage() {
+			return Math.floor(this._logicalIndex() / this.itemsPerView); // 0..totalPages-1
+		}
+		_goToPage(page) {
+			// page: 0..totalPages-1
+			const targetLogical = page * this.itemsPerView; // 페이지의 첫 카드
+			const curLogical = this._logicalIndex();
+			const deltaCards = targetLogical - curLogical; // 몇 장 이동?
+			this.current += deltaCards;
+			this._translate(this.current, true);
+			this._updatePaginationActive();
+		}
+		_movePage(dir) {
+			// dir = +1 / -1
+			const next =
+				(this._currentPage() + dir + this.totalPages) % this.totalPages;
+			this._goToPage(next);
+		}
+
+		_updatePaginationActive() {
+			if (!this.pagiBars || !this.pagiBars.length) return;
+			const page = Math.floor(this._logicalIndex() / this.itemsPerView);
+			this.pagiBars.forEach((el, i) =>
+				el.classList.toggle("active", i === page)
+			);
+		}
+
+		/* ---------- interactions ---------- */
 		_bind() {
-			this.onNext = () => this._move(1);
-			this.onPrev = () => this._move(-1);
-			this.onTransitionEnd = () => this._handleEdge();
+			this.onNext = () => this._movePage(+1);
+			this.onPrev = () => this._movePage(-1);
+			this.onEnd = () => {
+				this._handleEdges();
+				this._updatePaginationActive();
+			};
 			this._onResize = () => this._recalc();
 
 			this.nextBtn.addEventListener("click", this.onNext);
 			this.prevBtn.addEventListener("click", this.onPrev);
-			this.track.addEventListener("transitionend", this.onTransitionEnd);
+			this.track.addEventListener("transitionend", this.onEnd);
 
-			// 드래그/스와이프(선택 사항): 마우스만 간단 지원
-			let startX = 0,
+			// 드래그/스와이프도 페이지 단위
+			let mStartX = 0,
 				dragging = false;
 			this.viewport.addEventListener("mousedown", (e) => {
 				dragging = true;
-				startX = e.clientX;
+				mStartX = e.clientX;
 			});
 			window.addEventListener("mouseup", (e) => {
 				if (!dragging) return;
-				const dx = e.clientX - startX;
 				dragging = false;
-				if (dx < -30) this._move(1);
-				else if (dx > 30) this._move(-1);
+				const dx = e.clientX - mStartX;
+				if (dx < -30) this._movePage(+1);
+				else if (dx > 30) this._movePage(-1);
 			});
+
+			let tStartX = 0;
+			this.viewport.addEventListener(
+				"touchstart",
+				(e) => {
+					tStartX = e.touches[0].clientX;
+				},
+				{ passive: true }
+			);
+			this.viewport.addEventListener(
+				"touchend",
+				(e) => {
+					const dx = (e.changedTouches[0]?.clientX || 0) - tStartX;
+					if (dx < -30) this._movePage(+1);
+					else if (dx > 30) this._movePage(-1);
+				},
+				{ passive: true }
+			);
 		}
 
-		_translateTo(index, animate = true) {
-			if (!animate) this.track.style.transition = "none";
-			const x = -(index * this.step);
-			this.track.style.transform = `translateX(${x}px)`;
-			if (!animate) {
-				// reflow 후 transition 복구
-				this.track.offsetHeight; // force reflow
-				this.track.style.transition = "";
+		/* === 리사이즈 시 페이지 재계산 & 현재 페이지로 스냅 === */
+		_recalc() {
+			const w = this._slideWidth(),
+				g = this._readGap();
+			if (w !== this.cardWidth || g !== this.gap) {
+				this.cardWidth = w;
+				this.gap = g;
+				this.step = w + g;
 			}
-		}
-
-		_jumpWithoutAnim(index) {
-			this._translateTo(index, false);
+			const prevPage = this._currentPage();
+			const prevTotal = this.totalPages;
+			this._computeLayout();
+			if (this.totalPages !== prevTotal) this._buildPagination();
+			this._goToPage(Math.min(prevPage, this.totalPages - 1)); // 현재 보던 페이지 유지
+			this._jump(this.current); // 위치 보정
 		}
 
 		_move(delta) {
 			this.current += delta;
-			this._translateTo(this.current, true);
+			this._translate(this.current, true);
+			// transitionend에서 active 갱신되지만, 즉시 반영도 해줌
+			this._updatePaginationActive();
 		}
 
-		_handleEdge() {
-			// 중앙 원본 범위: [n, 2n-1]
+		_handleEdges() {
 			if (this.current >= 2 * this.n) {
-				// 뒤쪽 클론으로 넘어갔음 -> 동일 원본 위치로 순간이동
 				this.current -= this.n;
-				this._jumpWithoutAnim(this.current);
+				this._jump(this.current);
 			} else if (this.current < this.n) {
-				// 앞쪽 클론으로 넘어감 -> 동일 원본 위치로 순간이동
 				this.current += this.n;
-				this._jumpWithoutAnim(this.current);
+				this._jump(this.current);
 			}
 		}
 
 		_recalc() {
-			const newCardWidth = this._slideWidth();
-			const newGap = this._readGap();
-			if (newCardWidth !== this.cardWidth || newGap !== this.gap) {
-				this.cardWidth = newCardWidth;
-				this.gap = newGap;
-				this.step = this.cardWidth + this.gap;
-				this._jumpWithoutAnim(this.current); // 현재 인덱스 기준으로 재배치
+			const w = this._slideWidth();
+			const g = this._readGap();
+			if (w !== this.cardWidth || g !== this.gap) {
+				this.cardWidth = w;
+				this.gap = g;
+				this.step = w + g;
 			}
+			// 페이지 수 재산정 및 UI 재구성
+			const prevPages = this.totalPages;
+			this._computeLayout();
+			if (this.totalPages !== prevPages) this._buildPagination();
+			this._jump(this.current);
+			this._updatePaginationActive();
 		}
 	}
 
-	// 페이지 내 모든 캐러셀 초기화
-	document.querySelectorAll("[data-carousel]").forEach((root) => {
-		new InfiniteCarousel(root);
-	});
+	document
+		.querySelectorAll("[data-carousel]")
+		.forEach((root) => new InfiniteCarousel(root));
 });

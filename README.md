@@ -19,5 +19,5 @@ Material UI icons are used for this project
 - 알람 hover 시 모달 노출 V
 - 프로필 hover 시 모달 노출 V
 - 카드형 콘텐츠 무한 Carousel 구현 V
-- pagination
+- pagination V
 - 카테고리별 카드 개수 다르게 설정

@@ -559,3 +559,27 @@ body {
 		height: 175px;
 	}
 }
+
+.cr-pagination {
+	position: absolute;
+	top: 8px;
+	right: 60px;
+	display: flex;
+	gap: 6px;
+	z-index: 3;
+	pointer-events: none;
+}
+
+.cr-pagination .bar {
+	width: 28px;
+	height: 4px;
+	border-radius: 2px;
+	background: rgba(255, 255, 255, 0.22);
+	opacity: 0.6;
+	transition: background 0.2s ease, opacity 0.2s ease, width 0.2s ease;
+}
+
+.cr-pagination .bar.active {
+	background: rgba(255, 255, 255, 0.9);
+	opacity: 1;
+}
