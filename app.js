@@ -48,7 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 
 		_translate(i, animated = true) {
-			if (!animated) this.track.style.transition = "none";
+			if (animated) this.isAnimating = true;
+			else this.track.style.transition = "none";
+
 			this.track.style.transform = `translateX(${-(i * this.step)}px)`;
 			if (!animated) {
 				this.track.offsetHeight;
@@ -60,23 +62,41 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 
 		/* ---------- pagination ---------- */
+		_buildPageStarts() {
+			const k = this.itemsPerView; // 한 줄에 보이는 카드 개수
+			const n = this.n; // 전체 카드 개수
+			const starts = [];
+
+			for (let s = 0; s + k <= n; s += k) {
+				starts.push(s);
+			}
+
+			// 남는 카드가 있으면 마지막 페이지를 추가
+			if (n % k !== 0) {
+				starts.push(n - k);
+			}
+
+			this.pageStarts = starts;
+			this.totalPages = starts.length; // bar 개수 = pageStarts 개수
+		}
+
 		_computeLayout() {
 			const vw = this.viewport.clientWidth;
 			const unit = this.cardWidth + this.gap;
 			this.itemsPerView = Math.max(1, Math.floor((vw + this.gap) / unit));
-			this.totalPages = Math.max(1, Math.ceil(this.n / this.itemsPerView));
+			this._buildPageStarts();
 		}
 
 		_buildPagination() {
-			// 필요 시 재빌드
-			if (this.pagi.dataset.count == this.totalPages) return;
+			if (!this.pagi) return;
+
 			this.pagi.replaceChildren();
 			for (let i = 0; i < this.totalPages; i++) {
 				const b = document.createElement("span");
 				b.className = "bar";
 				this.pagi.appendChild(b);
 			}
-			this.pagi.dataset.count = String(this.totalPages);
+
 			this.pagiBars = Array.from(this.pagi.children);
 		}
 
@@ -86,41 +106,75 @@ document.addEventListener("DOMContentLoaded", () => {
 			return ((raw % this.n) + this.n) % this.n;
 		}
 
-		_currentPage() {
-			return Math.floor(this._logicalIndex() / this.itemsPerView); // 0..totalPages-1
-		}
-		_goToPage(page) {
-			// page: 0..totalPages-1
-			const targetLogical = page * this.itemsPerView; // 페이지의 첫 카드
-			const curLogical = this._logicalIndex();
-			const deltaCards = targetLogical - curLogical; // 몇 장 이동?
-			this.current += deltaCards;
-			this._translate(this.current, true);
-			this._updatePaginationActive();
-		}
-		_movePage(dir) {
-			// dir = +1 / -1
-			const next =
-				(this._currentPage() + dir + this.totalPages) % this.totalPages;
-			this._goToPage(next);
+		_currentPageIndex() {
+			// 논리 인덱스(0..n-1)를 현재 페이지 시작 구간에 매핑
+			const li = this._logicalIndex();
+			const starts = this.pageStarts || [0];
+			let idx = 0;
+			for (let i = 0; i < starts.length; i++) {
+				const s = starts[i];
+				const e = i < starts.length - 1 ? starts[i + 1] : this.n; // 마지막은 n까지
+				if (li >= s && li < e) {
+					idx = i;
+					break;
+				}
+			}
+			return idx;
 		}
 
+		/* ---------- pagination UI 업데이트 교체 ---------- */
 		_updatePaginationActive() {
 			if (!this.pagiBars || !this.pagiBars.length) return;
-			const page = Math.floor(this._logicalIndex() / this.itemsPerView);
+			// this.pageIndex 가 있다면 그걸, 없다면 계산값 사용
+			const idx =
+				this.isAnimating && typeof this.pageIndex === "number"
+					? this.pageIndex
+					: this._currentPageIndex();
 			this.pagiBars.forEach((el, i) =>
-				el.classList.toggle("active", i === page)
+				el.classList.toggle("active", i === idx)
 			);
+		}
+
+		/* ---------- 특정 페이지 인덱스로 이동 (연결감 유지) ---------- */
+		_goToPageIndex(targetIdx, dir = 0) {
+			const starts = this.pageStarts || [0];
+			const curLogical = this._logicalIndex();
+
+			// 해당 페이지의 시작 인덱스
+			let targetLogical = starts[targetIdx];
+
+			// 방향 보정 (되돌아보이는 현상 방지)
+			if (dir > 0 && targetLogical < curLogical) targetLogical += this.n;
+			if (dir < 0 && targetLogical > curLogical) targetLogical -= this.n;
+
+			const deltaCards = targetLogical - curLogical;
+			this.current += deltaCards;
+			this._translate(this.current, true);
+
+			// 현재 페이지 인덱스 동기화
+			this.pageIndex = targetIdx;
+			this._updatePaginationActive();
+		}
+
+		_movePage(dir) {
+			const total = this.totalPages || 1;
+			const curIdx = this._currentPageIndex();
+			const nextIdx = (curIdx + dir + total) % total;
+			this._goToPageIndex(nextIdx, dir);
+		}
+
+		_onTransitionEndSync() {
+			this._handleEdges(); // 클론 구간 보정
+			this.isAnimating = false;
+			this.pageIndex = this._currentPageIndex();
+			this._updatePaginationActive();
 		}
 
 		/* ---------- interactions ---------- */
 		_bind() {
 			this.onNext = () => this._movePage(+1);
 			this.onPrev = () => this._movePage(-1);
-			this.onEnd = () => {
-				this._handleEdges();
-				this._updatePaginationActive();
-			};
+			this.onEnd = () => this._onTransitionEndSync();
 			this._onResize = () => this._recalc();
 
 			this.nextBtn.addEventListener("click", this.onNext);
@@ -161,30 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			);
 		}
 
-		/* === 리사이즈 시 페이지 재계산 & 현재 페이지로 스냅 === */
-		_recalc() {
-			const w = this._slideWidth(),
-				g = this._readGap();
-			if (w !== this.cardWidth || g !== this.gap) {
-				this.cardWidth = w;
-				this.gap = g;
-				this.step = w + g;
-			}
-			const prevPage = this._currentPage();
-			const prevTotal = this.totalPages;
-			this._computeLayout();
-			if (this.totalPages !== prevTotal) this._buildPagination();
-			this._goToPage(Math.min(prevPage, this.totalPages - 1)); // 현재 보던 페이지 유지
-			this._jump(this.current); // 위치 보정
-		}
-
-		_move(delta) {
-			this.current += delta;
-			this._translate(this.current, true);
-			// transitionend에서 active 갱신되지만, 즉시 반영도 해줌
-			this._updatePaginationActive();
-		}
-
 		_handleEdges() {
 			if (this.current >= 2 * this.n) {
 				this.current -= this.n;
@@ -203,10 +233,9 @@ document.addEventListener("DOMContentLoaded", () => {
 				this.gap = g;
 				this.step = w + g;
 			}
-			// 페이지 수 재산정 및 UI 재구성
-			const prevPages = this.totalPages;
-			this._computeLayout();
-			if (this.totalPages !== prevPages) this._buildPagination();
+
+			this._computeLayout(); // itemsPerView와 pageStarts 재계산
+			this._buildPagination(); // pagination bar 다시 생성
 			this._jump(this.current);
 			this._updatePaginationActive();
 		}
