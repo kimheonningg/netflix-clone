@@ -1,4 +1,4 @@
-## Carousel
+## Infinite Carousel- 일반 row들
 
 `InfiniteCarousel` class를 만든 후, 모든 동적인 동작들을 class의 함수로 정의하고, `InfiniteCarousel` class 생성자에서 함수들을 실행하도록 하였다.
 
@@ -97,3 +97,15 @@ pagination bar가 어떤 index (`idx`)의 bar를 active 처리할지 계산하�
 #### \_recalc()
 
 브라우저 resizing 등을 handling: 카드 폭 등을 다시 계산하고 layout을 다시 셋팅한다.
+
+## Infinite Carousel- Top 10 부분
+
+Top 10은 따로 함수를 더 정의하여 구현하였다.
+
+`.top10-section`, `.top10-list`가 있는 tag들을 찾아 적용하도록 했다.
+
+CSS 스타일 동적으로 적용 -> `.css` 파일에 정의해도 되긴 함
+
+다른 carousel들과 따로 정의한 이유: `pageSize=5` (한번에 5개씩 보여주기)로 따로 구현하기 위함. 코드가 더 간단하므로
+
+-> 이렇게 Top10 custom되니 함수를 따로 정의한게 계산량이 줄어서 더 빠르게 구현할 수 있다
