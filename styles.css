@@ -389,8 +389,8 @@ body {
 .top10-list {
 	list-style: none;
 	display: flex;
-	gap: 32px;
-	counter-reset: rank;
+	gap: clamp(20px, 2.5vw, 32px);
+	padding-left: clamp(8px, 1.2vw, 16px);
 	position: relative;
 }
 
@@ -398,17 +398,17 @@ body {
 	position: relative;
 	display: flex;
 	align-items: flex-end;
+	padding-left: clamp(12px, 1.6vw, 24px);
 }
 
 .top10-item::before {
 	content: attr(data-rank);
 	position: absolute;
-	left: -70px;
-	font-weight: 900;
-	font-size: 300px;
-	line-height: 0.9;
+	left: -10px;
+	font-size: 50px;
+	line-height: 1;
 	color: transparent;
-	-webkit-text-stroke: 10px rgba(255, 255, 255, 0.16);
+	-webkit-text-stroke: 3px rgba(255, 255, 255, 0.16);
 	pointer-events: none;
 }
 

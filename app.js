@@ -264,6 +264,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	list.parentNode.insertBefore(viewport, list);
 	viewport.appendChild(list);
 
+	list.style.display = "flex";
+	list.style.flexWrap = "nowrap";
+
+	list.style.height = "100%";
+	if (!getComputedStyle(list).gap || getComputedStyle(list).gap === "0px") {
+		list.style.gap = "16px";
+	}
+
 	// 트랙 애니메이션
 	list.style.willChange = "transform";
 	list.style.transition = "transform 0.45s ease";
@@ -309,6 +317,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// 확장된 아이템으로 좌표 측정
 	let allItems = Array.from(list.children);
+
+	// --- 한 줄에 ‘정확히 5장’ 보이도록 카드 폭을 강제 ---
+	function getGapPx() {
+		const cs = getComputedStyle(list);
+		// column-gap이 정의돼 있으면 우선 사용
+		const g = parseFloat(cs.columnGap) || parseFloat(cs.gap) || 0;
+		return Number.isFinite(g) ? g : 0;
+	}
+
+	function applyItemLayout() {
+		const gapPx = getGapPx();
+		// 100%에서 갭*(pageSize-1)만큼 빼고 5로 나눔
+		const basis = `calc((100% - ${gapPx * (pageSize - 1)}px) / ${pageSize})`;
+		allItems.forEach((el) => {
+			el.style.flex = `0 0 ${basis}`;
+			el.style.maxWidth = basis; // 줄바꿈/늘어남 방지
+		});
+	}
+	applyItemLayout();
+
+	// 이미지가 있다면 꽉 차게
+	allItems.forEach((el) => {
+		const img = el.querySelector("img");
+		if (img) {
+			img.style.width = "100%";
+			img.style.height = "auto";
+			img.style.display = "block";
+		}
+	});
+
 	let baseX = allItems[0]?.offsetLeft || 0;
 
 	// 확장 인덱스(페이지 시작 위치): [ headClone, ...original pages..., tailClone ]
@@ -373,6 +411,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	// 리사이즈 시 현재 위치 유지
 	window.addEventListener("resize", () => {
 		allItems = Array.from(list.children);
+		applyItemLayout();
 		baseX = allItems[0]?.offsetLeft || 0;
 		translateTo(extIndex, false);
 	});
