@@ -2,6 +2,11 @@
 
 전기정보공학부 김희원 넷플릭스 클론 프로젝트
 
+### Branch info
+
+- feature : 과제 2 & 3 개발용
+- feature-vite : 과제 4 개발용
+
 ### How to run this project
 
 Run `index.html` via VS Code
