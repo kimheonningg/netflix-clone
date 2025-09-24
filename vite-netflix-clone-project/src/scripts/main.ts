@@ -1,7 +1,6 @@
 import "../styles/style.css";
-import { mountCarousels } from "./infiniteCarousel";
-import { top10 } from "./top10";
-// import { checkFetch } from "./fetch";
+import { mountCarousels } from "./components/infiniteCarousel";
+import { top10 } from "./components/top10";
 import { fetchNetflixData } from "./api/fetchData";
 import {
 	renderHero,
