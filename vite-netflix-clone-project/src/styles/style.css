@@ -281,7 +281,7 @@ body {
 	display: flex;
 	flex-direction: row;
 }
-.play {
+/* .play {
 	background: #fff;
 	color: #000;
 	justify-content: center;
@@ -295,7 +295,7 @@ body {
 }
 .play:hover {
 	background: #e6e6e6;
-}
+} */
 .info {
 	background: rgba(109, 109, 110, 0.7);
 	color: #fff;
@@ -519,4 +519,121 @@ body {
 .cr-pagination .bar.active {
 	background: rgba(255, 255, 255, 0.9);
 	opacity: 1;
+}
+
+/* ==== Card hover designs ==== */
+.cr-card {
+	position: relative;
+	border-radius: 6px;
+	overflow: hidden;
+	transform-origin: center;
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cr-card .card-media img {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.cr-card:hover,
+.cr-card:focus-within {
+	transform: scale(1.8);
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+	z-index: 10;
+}
+
+.cr-card .card-hover {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #141414;
+	color: #fff;
+	padding: 12px 12px;
+	opacity: 0;
+	transform: translateY(10px);
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.cr-card:hover .card-hover,
+.cr-card:focus-within .card-hover {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Buttons */
+.hover-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 7px;
+}
+.hover-right {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+.hover-left {
+	display: flex;
+	align-items: center;
+}
+.icon-btn.circle {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.2s, transform 0.2s;
+}
+.icon-btn.circle.play {
+	background: #fff;
+	color: #000;
+}
+.icon-btn.circle.ghost {
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	color: #fff;
+}
+.icon-btn.circle:hover {
+	transform: scale(1.12);
+}
+
+.cr-card .hover-top .material-symbols-outlined {
+	font-size: 10px;
+}
+
+/* Meta information */
+.hover-meta {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 10px;
+	color: #bbb;
+	margin-bottom: 6px;
+}
+.hover-meta .age-badge {
+	border: 1px solid #bbb;
+	padding: 0 4px;
+	font-size: 10px;
+	border-radius: 2px;
+	color: #fff;
+}
+
+/* 장르 */
+.hover-genres {
+	font-size: 10px;
+	color: #999;
+}
+.hover-genres span + span::before {
+	content: "•";
+	margin: 0 6px;
+	color: #666;
+}
+
+.cr-viewport {
+	overflow: visible;
 }

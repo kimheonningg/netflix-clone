@@ -69,19 +69,52 @@ export function renderCarousels(data: CarouselData[]) {
 		section.setAttribute("data-carousel", "");
 		const cardsHtml = carousel.items
 			.map(
-				(item) => `
-      <div class="cr-card">
-        <img src="${item.image}" alt="${item.alt}" />
-      </div>
-    `
+				(item, index) => `
+				<div class="cr-card" data-id="${index ?? ""}">
+					<div class="card-media">
+						<img src="${item.image}" alt="${item.alt ?? ""}" />
+					</div>
+					<div class="card-hover">
+						<div class="hover-top">
+							<div class="hover-right">
+								<button class="icon-btn circle play" aria-label="재생">
+									<span class="material-symbols-outlined">play_arrow</span>
+								</button>
+								<button class="icon-btn circle ghost" aria-label="내가 찜한 리스트에 추가">
+									<span class="material-symbols-outlined">add</span>
+								</button>
+								<button class="icon-btn circle ghost" aria-label="좋아요">
+									<span class="material-symbols-outlined">thumb_up</span>
+								</button>
+							</div>
+							<div class="hover-left">
+								<button class="icon-btn circle ghost" aria-label="더보기">
+									<span class="material-symbols-outlined">expand_more</span>
+								</button>
+							</div>
+						</div>
+
+						<div class="hover-meta">
+							<div class="age-badge">15+</div>
+							<span class="series-type">리미티드 시리즈</span>
+							<span class="quality">HD</span>
+						</div>
+
+						<div class="hover-genres">
+							순한맛 코미디 | 재밌는 | 셀럽
+						</div>
+					</div>
+				</div>
+   			`
 			)
 			.join("");
+
 		section.innerHTML = `
-      <h2>${carousel.title}</h2>
-      <button class="cr-btn prev" aria-label="이전">&#10094;</button>
-      <div class="cr-viewport"><div class="cr-track">${cardsHtml}</div></div>
-      <button class="cr-btn next" aria-label="다음">&#10095;</button>
-    `;
+			<h2>${carousel.title}</h2>
+			<button class="cr-btn prev" aria-label="이전">&#10094;</button>
+			<div class="cr-viewport"><div class="cr-track">${cardsHtml}</div></div>
+			<button class="cr-btn next" aria-label="다음">&#10095;</button>
+    	`;
 		top10Section.parentNode?.insertBefore(section, top10Section);
 	});
 }
