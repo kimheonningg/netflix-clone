@@ -14,6 +14,7 @@ export interface Profile {
 }
 
 export interface CarouselData {
+	id: string;
 	title: string;
 	items: ContentItem[];
 }

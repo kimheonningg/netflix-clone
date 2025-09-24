@@ -5,6 +5,7 @@ import type {
 	CarouselData,
 	ContentItem,
 } from "../../types/types";
+import { repaintLikes } from "../components/handleLikes";
 
 // Hero
 export function renderHero(data: HeroData) {
@@ -24,14 +25,14 @@ export function renderNotifications(data: Notification[]) {
 	list.innerHTML = data
 		.map(
 			(item) => `
-    <li>
-      <img src="${item.image}" alt="${item.alt}" />
-      <div class="notif-text">
-        <p class="notif-title">${item.title}</p>
-        <p class="notif-desc">${item.desc}</p>
-      </div>
-    </li>
-  `
+				<li>
+					<img src="${item.image}" alt="${item.alt}" />
+					<div class="notif-text">
+						<p class="notif-title">${item.title}</p>
+						<p class="notif-desc">${item.desc}</p>
+					</div>
+				</li>
+			`
 		)
 		.join("");
 }
@@ -67,10 +68,11 @@ export function renderCarousels(data: CarouselData[]) {
 		const section = document.createElement("section");
 		section.className = "carousel-row";
 		section.setAttribute("data-carousel", "");
+		const currentCarousel = carousel.id;
 		const cardsHtml = carousel.items
 			.map(
 				(item, index) => `
-				<div class="cr-card" data-id="${index ?? ""}">
+				<div class="cr-card" data-id="${currentCarousel + "-" + index ?? ""}">
 					<div class="card-media">
 						<img src="${item.image}" alt="${item.alt ?? ""}" />
 					</div>
@@ -83,7 +85,7 @@ export function renderCarousels(data: CarouselData[]) {
 								<button class="icon-btn circle ghost" aria-label="내가 찜한 리스트에 추가">
 									<span class="material-symbols-outlined">add</span>
 								</button>
-								<button class="icon-btn circle ghost" aria-label="좋아요">
+								<button class="icon-btn circle ghost btn-like" aria-label="좋아요" aria-pressed="false">
 									<span class="material-symbols-outlined">thumb_up</span>
 								</button>
 							</div>
@@ -117,6 +119,8 @@ export function renderCarousels(data: CarouselData[]) {
     	`;
 		top10Section.parentNode?.insertBefore(section, top10Section);
 	});
+
+	repaintLikes(document);
 }
 
 // TOP 10
@@ -126,12 +130,12 @@ export function renderTop10(data: ContentItem[]) {
 	list.innerHTML = data
 		.map(
 			(item) => `
-    <li class="top10-item" data-rank="${item.alt}">
-      <div class="poster-wrap">
-        <img class="poster-23" src="${item.image}" alt="${item.alt}" />
-      </div>
-    </li>
-  `
+				<li class="top10-item" data-rank="${item.alt}">
+				<div class="poster-wrap">
+					<img class="poster-23" src="${item.image}" alt="${item.alt}" />
+				</div>
+				</li>
+			`
 		)
 		.join("");
 }

@@ -37,6 +37,7 @@
 	],
 	"carousels": [
 		{
+			"id": "bobfriends",
 			"title": "밥친구",
 			"items": [
 				{ "image": "/public/assets/runningman.png", "alt": "밥친구 1" },
@@ -51,6 +52,7 @@
 			]
 		},
 		{
+			"id": "watching",
 			"title": ".님이 시청 중인 콘텐츠",
 			"items": [
 				{
@@ -104,6 +106,7 @@
 			]
 		},
 		{
+			"id": "romance",
 			"title": "연애 세포를 깨우는 작품들",
 			"items": [
 				{ "image": "/public/assets/runningman.png", "alt": "연애 작품 1" },
