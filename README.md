@@ -26,6 +26,6 @@ This project will open at `http://localhost:5173`
 
 - init vite project V
 - code migration V
-- 2.1 use fetch API to render card content
+- 2.1 use fetch API to render card content V
 - 2.2 like button (locally store info)
 - 2.3 mock server ?
