@@ -121,15 +121,15 @@
 		}
 	],
 	"top10": [
-		{ "image": "/assets/runningman.png", "alt": "1" },
-		{ "image": "/assets/runningman.png", "alt": "2" },
-		{ "image": "/assets/runningman.png", "alt": "3" },
-		{ "image": "/assets/runningman.png", "alt": "4" },
-		{ "image": "/assets/runningman.png", "alt": "5" },
-		{ "image": "/assets/runningman.png", "alt": "6" },
-		{ "image": "/assets/runningman.png", "alt": "7" },
-		{ "image": "/assets/runningman.png", "alt": "8" },
-		{ "image": "/assets/runningman.png", "alt": "9" },
-		{ "image": "/assets/runningman.png", "alt": "10" }
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "1" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "2" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "3" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "4" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "5" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "6" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "7" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "8" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "9" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "10" }
 	]
 }
