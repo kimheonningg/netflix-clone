@@ -30,9 +30,10 @@ This project will open at `http://localhost:5173`
 - 2.2 like button (locally store info) V
 - 2.3 mock server ?
 - Fix card carousel functionality: 옆으로 스크롤해도 card 안보이게 하기 V
-- (Z index 조절) card hover 시 pagination bar 안보이도록 수정
+- (Z index 조절) card hover 시 pagination bar 안보이도록 수정 V
 
 ### 개발 노트
 
-[Troubleshooting 과정](./TROUBLESHOOTING_NOTES.md)
-[프로젝트 구조, 코드 등 정리](./CODE_NOTES.md)
+- [Troubleshooting 과정](./TROUBLESHOOTING_NOTES.md)
+
+- [프로젝트 구조, 코드 등 정리](./CODE_NOTES.md)
