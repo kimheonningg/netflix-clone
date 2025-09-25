@@ -72,9 +72,9 @@ export function renderCarousels(data: CarouselData[]) {
 		const cardsHtml = carousel.items
 			.map(
 				(item, index) => `
-				<div class="cr-card" data-id="${currentCarousel + "-" + index ?? ""}">
+				<div class="cr-card" data-id="${currentCarousel + "-" + index}">
 					<div class="card-media">
-						<img src="${item.image}" alt="${item.alt ?? ""}" />
+						<img src="${item.image}" alt="${item.alt}" />
 					</div>
 					<div class="card-hover">
 						<div class="hover-top">
