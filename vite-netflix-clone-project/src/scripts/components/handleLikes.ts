@@ -1,87 +1,74 @@
-const STORAGE_KEY = "likes:v1";
-type LikeKey = string;
+const LIKES_KEY = "netflix-liked-items";
 
-export function parseLikeKey(
-	key: string
-): { rowId: string; index: number } | null {
-	const m = key.match(/^(.+)-(\d+)$/);
-	if (!m) return null;
-	return { rowId: m[1], index: Number(m[2]) };
+function getLikedItems(): string[] {
+	const likedItemsJSON = localStorage.getItem(LIKES_KEY);
+	return likedItemsJSON ? JSON.parse(likedItemsJSON) : [];
 }
 
-function getCardKeyFrom(el: Element | null): LikeKey | null {
-	const card = el?.closest<HTMLElement>(".cr-card");
-	const key = card?.dataset.id?.trim();
-	return key && /^.+-\d+$/.test(key) ? key : null;
+function saveLikedItems(items: string[]): void {
+	localStorage.setItem(LIKES_KEY, JSON.stringify(items));
 }
 
-function loadLikes(): Set<LikeKey> {
-	try {
-		const raw = sessionStorage.getItem(STORAGE_KEY);
-		if (!raw) return new Set();
-		const arr = JSON.parse(raw) as LikeKey[];
-		return new Set(arr);
-	} catch {
-		return new Set();
+function toggleLike(cardId: string): void {
+	const likedItems = getLikedItems();
+	const itemIndex = likedItems.indexOf(cardId);
+
+	if (itemIndex > -1) {
+		likedItems.splice(itemIndex, 1);
+	} else {
+		likedItems.push(cardId);
 	}
-}
-function saveLikes(s: Set<LikeKey>) {
-	try {
-		console.log("likes::: ", s);
-		sessionStorage.setItem(STORAGE_KEY, JSON.stringify([...s]));
-	} catch {
-		// do nothing
-	}
+
+	saveLikedItems(likedItems);
 }
 
-function setButtonVisual(btn: HTMLButtonElement, liked: boolean) {
-	btn.classList.toggle("is-liked", liked);
-	btn.setAttribute("aria-pressed", liked ? "true" : "false");
-	const icon = btn.querySelector<HTMLElement>(".material-symbols-outlined");
-	if (icon) {
-		icon.style.fontVariationSettings = liked
-			? `"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24`
-			: `"FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24`;
-	}
-}
+export function repaintLikes(
+	container: Document | HTMLElement = document
+): void {
+	const likedItems = getLikedItems();
 
-export function repaintLikes(root: ParentNode = document) {
-	const likes = loadLikes();
-	root.querySelectorAll<HTMLDivElement>(".cr-card").forEach((card) => {
-		const key = card.dataset.id;
-		if (!key) return;
-		const btn = card.querySelector<HTMLButtonElement>(".btn-like");
-		if (btn) setButtonVisual(btn, likes.has(key));
+	const likeButtons =
+		container.querySelectorAll<HTMLButtonElement>(".btn-like");
+
+	if (likeButtons.length === 0) {
+		console.error(
+			"아직 DOM에 .btn-like 요소가 없습니다. 호출 시점을 확인하세요."
+		);
+		return;
+	}
+
+	likeButtons.forEach((button) => {
+		const card = button.closest<HTMLElement>(".cr-card");
+		const cardId = card?.dataset.id;
+
+		if (cardId && likedItems.includes(cardId)) {
+			button.setAttribute("aria-pressed", "true");
+			button.classList.add("liked");
+		} else {
+			button.setAttribute("aria-pressed", "false");
+			button.classList.remove("liked");
+		}
 	});
 }
 
-export function initLikes(root: ParentNode = document) {
-	repaintLikes(root);
+export function initLikeButtons(): void {
+	document.body.addEventListener("click", (event) => {
+		const target = event.target as HTMLElement;
+		const likeButton = target.closest<HTMLButtonElement>(".btn-like");
 
-	root.addEventListener("click", (e) => {
-		const target = e.target as HTMLElement;
-		const btn = target.closest<HTMLButtonElement>(".btn-like");
-		if (!btn) return;
+		if (!likeButton) {
+			return;
+		}
 
-		const key = getCardKeyFrom(btn);
-		console.log("key::", key);
-		if (!key) return;
+		const card = likeButton.closest<HTMLElement>(".cr-card");
+		const cardId = card?.dataset.id;
 
-		const likes = loadLikes();
-		if (likes.has(key)) likes.delete(key);
-		else likes.add(key);
+		if (!cardId) return;
 
-		saveLikes(likes);
-		setButtonVisual(btn, likes.has(key));
+		toggleLike(cardId);
+
+		const isPressed = likeButton.getAttribute("aria-pressed") === "true";
+		likeButton.setAttribute("aria-pressed", String(!isPressed));
+		likeButton.classList.toggle("liked");
 	});
-}
-
-export function getLikesByRow(rowId: string): number[] {
-	const likes = loadLikes();
-	const arr: number[] = [];
-	likes.forEach((k) => {
-		const parsed = parseLikeKey(k);
-		if (parsed && parsed.rowId === rowId) arr.push(parsed.index);
-	});
-	return arr.sort((a, b) => a - b);
 }

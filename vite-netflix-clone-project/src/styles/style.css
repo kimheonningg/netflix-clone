@@ -637,3 +637,14 @@ body {
 .cr-viewport {
 	overflow: visible;
 }
+
+.icon-btn.ghost.btn-like.liked,
+.icon-btn.ghost.btn-like[aria-pressed="true"] {
+	border-color: #46d369;
+	background-color: rgba(70, 211, 105, 0.15);
+}
+
+.icon-btn.ghost.btn-like.liked .material-symbols-outlined,
+.icon-btn.ghost.btn-like[aria-pressed="true"] .material-symbols-outlined {
+	color: #46d369;
+}

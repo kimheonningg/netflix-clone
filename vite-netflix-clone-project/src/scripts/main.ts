@@ -9,6 +9,7 @@ import {
 	renderCarousels,
 	renderTop10,
 } from "./render/render";
+import { initLikeButtons } from "./components/handleLikes";
 
 async function initializeApp() {
 	try {
@@ -25,6 +26,8 @@ async function initializeApp() {
 		// handle other events on the rendered DOM
 		mountCarousels();
 		top10();
+
+		initLikeButtons();
 	} catch (error) {
 		document.body.innerHTML = `<h1>페이지 로딩 중 오류가 발생했습니다.</h1>`;
 	}
