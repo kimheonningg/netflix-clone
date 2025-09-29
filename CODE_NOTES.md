@@ -9,6 +9,11 @@
 
 - `scripts/components` : typescript files handling UI actions
 - `scripts/components/handleLikes.ts` : Handles likes of cards- Uses localStorage to store "like" states, States and UI are changed when the card icon is clicked, "Like" states are restored even after refreshing the browser.
+  - `getLikedItems()`
+  - `saveLikedItems()`
+  - `toggleLike()` : Change to like if currently unliked, and vice versa.
+  - `repaintLikes()` : Update UI whenever refreshing or DOM is updated
+  - `initLikeButtons()` : Register click events (Initialize event listeners) -> used whenever the user clicks
 - `scripts/components/infiniteCarousel.ts` : Handles infinite carousel actions (Check [Previous Notes](#previous-notes))
 - `scripts/components/top10.ts` : Handles top10 carousel actions (Check [Previous Notes](#previous-notes))
 
