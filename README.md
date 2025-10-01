@@ -40,7 +40,7 @@ This project will open at `http://localhost:5173`
 
 - 1. 검색 기능 구현
 
-  - 더 많은 Netflix 컨텐츠 가저오기 (풍성한 검색어를 구현하기 위함)
+  - 더 많은 Netflix 컨텐츠 가저오기 (풍성한 검색어를 구현하기 위함) V
   - `data.json`에 연관검색어 데이터도 추가해서, 검색 시 연관검색어와 매칭하고 보여주도록 하자.
   - 추천 검색어 기능도 추천검색어 목록을 `const.ts` 만들어서 하드코딩으로 구현
 
@@ -50,6 +50,7 @@ This project will open at `http://localhost:5173`
   - Express 환경 구성: `npm install express`
   - Server port는 3000으로 설정 후 config file에 proxy 추가
   - 1초 지연: `setTimeout`
+  - Use `fetch ... then` syntax
 
 - 3. 검색창과 최근검색어 기능 (선택- 시간 되면)
 

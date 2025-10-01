@@ -41,14 +41,14 @@
 			"title": "밥친구",
 			"items": [
 				{ "image": "/assets/runningman.png", "alt": "밥친구 1" },
-				{ "image": "/assets/runningman.png", "alt": "밥친구 2" },
-				{ "image": "/assets/runningman.png", "alt": "밥친구 3" },
-				{ "image": "/assets/runningman.png", "alt": "밥친구 4" },
-				{ "image": "/assets/runningman.png", "alt": "밥친구 5" },
-				{ "image": "/assets/runningman.png", "alt": "밥친구 6" },
-				{ "image": "/assets/runningman.png", "alt": "밥친구 7" },
-				{ "image": "/assets/runningman.png", "alt": "밥친구 8" },
-				{ "image": "/assets/runningman.png", "alt": "밥친구 9" }
+				{ "image": "/assets/business_proposal.png", "alt": "밥친구 2" },
+				{ "image": "/assets/crime_scene_zero.png", "alt": "밥친구 3" },
+				{ "image": "/assets/i_am_solo.png", "alt": "밥친구 4" },
+				{ "image": "/assets/mr_sunshine.png", "alt": "밥친구 5" },
+				{ "image": "/assets/sky_castle.png", "alt": "밥친구 6" },
+				{ "image": "/assets/the_glory.png", "alt": "밥친구 7" },
+				{ "image": "/assets/truman_show.png", "alt": "밥친구 8" },
+				{ "image": "/assets/vincenzo.png", "alt": "밥친구 9" }
 			]
 		},
 		{
@@ -60,47 +60,47 @@
 					"alt": "시청 중인 콘텐츠 1"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/business_proposal.png",
 					"alt": "시청 중인 콘텐츠 2"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/crime_scene_zero.png",
 					"alt": "시청 중인 콘텐츠 3"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/i_am_solo.png",
 					"alt": "시청 중인 콘텐츠 4"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/mr_sunshine.png",
 					"alt": "시청 중인 콘텐츠 5"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/sky_castle.png",
 					"alt": "시청 중인 콘텐츠 6"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/the_glory.png",
 					"alt": "시청 중인 콘텐츠 7"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/truman_show.png",
 					"alt": "시청 중인 콘텐츠 8"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/vincenzo.png",
 					"alt": "시청 중인 콘텐츠 9"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/signal.png",
 					"alt": "시청 중인 콘텐츠 10"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/i_am_solo_love_continues.png",
 					"alt": "시청 중인 콘텐츠 11"
 				},
 				{
-					"image": "/assets/runningman.png",
+					"image": "/assets/black_white_cook.png",
 					"alt": "시청 중인 콘텐츠 12"
 				}
 			]
@@ -110,13 +110,13 @@
 			"title": "연애 세포를 깨우는 작품들",
 			"items": [
 				{ "image": "/assets/runningman.png", "alt": "연애 작품 1" },
-				{ "image": "/assets/runningman.png", "alt": "연애 작품 2" },
-				{ "image": "/assets/runningman.png", "alt": "연애 작품 3" },
-				{ "image": "/assets/runningman.png", "alt": "연애 작품 4" },
-				{ "image": "/assets/runningman.png", "alt": "연애 작품 5" },
-				{ "image": "/assets/runningman.png", "alt": "연애 작품 6" },
-				{ "image": "/assets/runningman.png", "alt": "연애 작품 7" },
-				{ "image": "/assets/runningman.png", "alt": "연애 작품 8" }
+				{ "image": "/assets/business_proposal.png", "alt": "연애 작품 2" },
+				{ "image": "/assets/crime_scene_zero.png", "alt": "연애 작품 3" },
+				{ "image": "/assets/i_am_solo.png", "alt": "연애 작품 4" },
+				{ "image": "/assets/mr_sunshine.png", "alt": "연애 작품 5" },
+				{ "image": "/assets/sky_castle.png", "alt": "연애 작품 6" },
+				{ "image": "/assets/the_glory.png", "alt": "연애 작품 7" },
+				{ "image": "/assets/truman_show.png", "alt": "연애 작품 8" }
 			]
 		}
 	],
