@@ -40,15 +40,150 @@
 			"id": "bobfriends",
 			"title": "밥친구",
 			"items": [
-				{ "image": "/assets/runningman.png", "alt": "밥친구 1" },
-				{ "image": "/assets/business_proposal.png", "alt": "밥친구 2" },
-				{ "image": "/assets/crime_scene_zero.png", "alt": "밥친구 3" },
-				{ "image": "/assets/i_am_solo.png", "alt": "밥친구 4" },
-				{ "image": "/assets/mr_sunshine.png", "alt": "밥친구 5" },
-				{ "image": "/assets/sky_castle.png", "alt": "밥친구 6" },
-				{ "image": "/assets/the_glory.png", "alt": "밥친구 7" },
-				{ "image": "/assets/truman_show.png", "alt": "밥친구 8" },
-				{ "image": "/assets/vincenzo.png", "alt": "밥친구 9" }
+				{
+					"image": "/assets/runningman.png",
+					"alt": "밥친구 1",
+					"keywords": [
+						"런닝맨",
+						"예능",
+						"유재석",
+						"버라이어티",
+						"웃긴 예능",
+						"주말 추천",
+						"리얼리티",
+						"팀 미션",
+						"추리",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/business_proposal.png",
+					"alt": "밥친구 2",
+					"keywords": [
+						"사내맞선",
+						"로맨스",
+						"로맨스코미디",
+						"달달",
+						"가볍게 보기",
+						"케미",
+						"힐링",
+						"연애",
+						"주말 추천",
+						"직장 로맨스"
+					]
+				},
+				{
+					"image": "/assets/crime_scene_zero.png",
+					"alt": "밥친구 3",
+					"keywords": [
+						"크라임씬",
+						"추리",
+						"예능",
+						"두뇌 싸움",
+						"리얼리티",
+						"범죄",
+						"방탈출",
+						"팀 미션",
+						"스릴러",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/i_am_solo.png",
+					"alt": "밥친구 4",
+					"keywords": [
+						"나는 솔로",
+						"연애",
+						"리얼리티",
+						"데이트",
+						"케미",
+						"솔로나라",
+						"가볍게 보기",
+						"로맨스",
+						"주말 추천",
+						"관찰 예능"
+					]
+				},
+				{
+					"image": "/assets/mr_sunshine.png",
+					"alt": "밥친구 5",
+					"keywords": [
+						"미스터 션샤인",
+						"사극",
+						"멜로",
+						"명대사",
+						"로맨스",
+						"스릴러",
+						"김태리",
+						"이병헌",
+						"감동",
+						"복수"
+					]
+				},
+				{
+					"image": "/assets/sky_castle.png",
+					"alt": "밥친구 6",
+					"keywords": [
+						"스카이 캐슬",
+						"드라마",
+						"풍자",
+						"블랙코미디",
+						"입시",
+						"상류층",
+						"스릴러",
+						"복수",
+						"명작",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/the_glory.png",
+					"alt": "밥친구 7",
+					"keywords": [
+						"더 글로리",
+						"복수",
+						"송혜교",
+						"스릴러",
+						"로맨스",
+						"학폭",
+						"김은숙",
+						"명대사",
+						"케미",
+						"드라마"
+					]
+				},
+				{
+					"image": "/assets/truman_show.png",
+					"alt": "밥친구 8",
+					"keywords": [
+						"트루먼 쇼",
+						"영화",
+						"명작",
+						"철학",
+						"리얼리티",
+						"풍자",
+						"감동",
+						"스릴러",
+						"케미",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/vincenzo.png",
+					"alt": "밥친구 9",
+					"keywords": [
+						"빈센조",
+						"송중기",
+						"다크 코미디",
+						"로펌",
+						"브로맨스",
+						"복수",
+						"로맨스",
+						"명작",
+						"스릴러",
+						"케미"
+					]
+				}
 			]
 		},
 		{
@@ -56,52 +191,196 @@
 			"title": ".님이 시청 중인 콘텐츠",
 			"items": [
 				{
-					"image": "/assets/runningman.png",
-					"alt": "시청 중인 콘텐츠 1"
+					"image": "/assets/emily_in_paris.png",
+					"alt": "시청 중인 콘텐츠 1",
+					"keywords": [
+						"에밀리 인 파리",
+						"로맨스",
+						"코미디",
+						"패션",
+						"힐링",
+						"연애",
+						"주말 추천",
+						"달달",
+						"명작",
+						"케미"
+					]
 				},
 				{
-					"image": "/assets/business_proposal.png",
-					"alt": "시청 중인 콘텐츠 2"
+					"image": "/assets/exhuma.png",
+					"alt": "시청 중인 콘텐츠 2",
+					"keywords": [
+						"파묘",
+						"스릴러",
+						"공포",
+						"범죄",
+						"추리",
+						"주말 추천",
+						"긴장감",
+						"명작",
+						"케미",
+						"복수"
+					]
 				},
 				{
-					"image": "/assets/crime_scene_zero.png",
-					"alt": "시청 중인 콘텐츠 3"
+					"image": "/assets/gossip_girl.png",
+					"alt": "시청 중인 콘텐츠 3",
+					"keywords": [
+						"가십걸",
+						"로맨스",
+						"드라마",
+						"청춘",
+						"상류층",
+						"주말 추천",
+						"힐링",
+						"명작",
+						"케미",
+						"연애"
+					]
 				},
 				{
-					"image": "/assets/i_am_solo.png",
-					"alt": "시청 중인 콘텐츠 4"
+					"image": "/assets/mean_girls.png",
+					"alt": "시청 중인 콘텐츠 4",
+					"keywords": [
+						"퀸카로 살아남는 법",
+						"코미디",
+						"청춘",
+						"하이틴",
+						"로맨스",
+						"주말 추천",
+						"명작",
+						"힐링",
+						"케미",
+						"연애"
+					]
 				},
 				{
-					"image": "/assets/mr_sunshine.png",
-					"alt": "시청 중인 콘텐츠 5"
+					"image": "/assets/otis_secret_counseling_office.png",
+					"alt": "시청 중인 콘텐츠 5",
+					"keywords": [
+						"오티스의 비밀 상담소",
+						"로맨스",
+						"코미디",
+						"청춘",
+						"힐링",
+						"연애",
+						"주말 추천",
+						"명작",
+						"케미",
+						"달달"
+					]
 				},
 				{
-					"image": "/assets/sky_castle.png",
-					"alt": "시청 중인 콘텐츠 6"
+					"image": "/assets/spring_of_seoul.png",
+					"alt": "시청 중인 콘텐츠 6",
+					"keywords": [
+						"서울의 봄",
+						"드라마",
+						"역사",
+						"감동",
+						"명작",
+						"복수",
+						"스릴러",
+						"주말 추천",
+						"케미",
+						"긴장감"
+					]
 				},
 				{
-					"image": "/assets/the_glory.png",
-					"alt": "시청 중인 콘텐츠 7"
+					"image": "/assets/the_legend_of_the_blue_sea.png",
+					"alt": "시청 중인 콘텐츠 7",
+					"keywords": [
+						"푸른 바다의 전설",
+						"로맨스",
+						"판타지",
+						"이민호",
+						"전지현",
+						"달달",
+						"명작",
+						"연애",
+						"힐링",
+						"주말 추천"
+					]
 				},
 				{
-					"image": "/assets/truman_show.png",
-					"alt": "시청 중인 콘텐츠 8"
+					"image": "/assets/xo_kitty.png",
+					"alt": "시청 중인 콘텐츠 8",
+					"keywords": [
+						"XO 키티",
+						"로맨스",
+						"청춘",
+						"달달",
+						"하이틴",
+						"연애",
+						"힐링",
+						"명작",
+						"케미",
+						"주말 추천"
+					]
 				},
 				{
-					"image": "/assets/vincenzo.png",
-					"alt": "시청 중인 콘텐츠 9"
+					"image": "/assets/kpop_demon_hunters_sing_along.png",
+					"alt": "시청 중인 콘텐츠 9",
+					"keywords": [
+						"케이팝 데몬 헌터즈",
+						"음악",
+						"판타지",
+						"애니메이션",
+						"액션",
+						"명작",
+						"청춘",
+						"주말 추천",
+						"케미",
+						"힐링"
+					]
 				},
 				{
 					"image": "/assets/signal.png",
-					"alt": "시청 중인 콘텐츠 10"
+					"alt": "시청 중인 콘텐츠 10",
+					"keywords": [
+						"시그널",
+						"범죄",
+						"스릴러",
+						"추리",
+						"타임슬립",
+						"김혜수",
+						"이제훈",
+						"명작",
+						"복수",
+						"케미"
+					]
 				},
 				{
 					"image": "/assets/i_am_solo_love_continues.png",
-					"alt": "시청 중인 콘텐츠 11"
+					"alt": "시청 중인 콘텐츠 11",
+					"keywords": [
+						"나는 솔로 사랑은 계속된다",
+						"연애",
+						"리얼리티",
+						"데이트",
+						"솔로나라",
+						"케미",
+						"힐링",
+						"주말 추천",
+						"로맨스",
+						"가볍게 보기"
+					]
 				},
 				{
 					"image": "/assets/black_white_cook.png",
-					"alt": "시청 중인 콘텐츠 12"
+					"alt": "시청 중인 콘텐츠 12",
+					"keywords": [
+						"흑백요리사",
+						"요리",
+						"예능",
+						"리얼리티",
+						"먹방",
+						"힐링",
+						"주말 추천",
+						"웃긴 예능",
+						"케미",
+						"명작"
+					]
 				}
 			]
 		},

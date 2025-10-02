@@ -61,6 +61,8 @@ This project will open at `http://localhost:5173`
 
 - 설계서 작성하기
 
+- carousel next/prev 기능 점검
+
 - NOTE
   - class 문법 사용 x, use only functions
 
