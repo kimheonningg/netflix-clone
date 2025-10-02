@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 
-import { version } from "./data.js";
+import { version } from "./data/data.js";
+
+import netflixData from "./data/netflix-data.json" assert { type: "json" };
 
 const app = express();
 const PORT = 3000;
@@ -15,6 +17,12 @@ const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 app.get("/test/version", (req, res) => {
 	delay(1000).then(() => {
 		res.json({ version: version });
+	});
+});
+
+app.get("/api/app-data", (req, res) => {
+	delay(1000).then(() => {
+		res.json(netflixData);
 	});
 });
 

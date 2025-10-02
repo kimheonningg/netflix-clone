@@ -1,0 +1,535 @@
+{
+	"hero": {
+		"rank": "오늘 시리즈 순위 2위",
+		"description": "대한민국을 대표하는 장수 예능 프로그램. 팀을 이룬 연예인 출연자들이 다양한 미션을 해결하기 위해 여러 유명 장소를 열심히 뛰어다닌다.",
+		"image": "/assets/runningman.png"
+	},
+	"notifications": [
+		{
+			"image": "/assets/runningman.png",
+			"alt": "알림1",
+			"title": "9월 12일 공개",
+			"desc": "지금 예고편을 시청하세요"
+		},
+		{
+			"image": "/assets/runningman.png",
+			"alt": "알림2",
+			"title": "넷플릭스 '신규 콘텐츠 가이드'",
+			"desc": "공개 예정작을 살펴보세요"
+		},
+		{
+			"image": "/assets/runningman.png",
+			"alt": "알림3",
+			"title": "신규 콘텐츠",
+			"desc": "나는 생존자다"
+		},
+		{
+			"image": "/assets/runningman.png",
+			"alt": "알림4",
+			"title": "웬즈데이 시즌 2",
+			"desc": "손맛이 다른 세계가 온다"
+		}
+	],
+	"profiles": [
+		{ "name": "사용자1", "avatar": "/assets/runningman.png" },
+		{ "name": "사용자2", "avatar": "/assets/runningman.png" },
+		{ "name": "키즈", "avatar": "/assets/runningman.png" }
+	],
+	"carousels": [
+		{
+			"id": "bobfriends",
+			"title": "밥친구",
+			"items": [
+				{
+					"image": "/assets/runningman.png",
+					"alt": "밥친구 1",
+					"keywords": [
+						"런닝맨",
+						"예능",
+						"유재석",
+						"버라이어티",
+						"웃긴 예능",
+						"주말 추천",
+						"리얼리티",
+						"팀 미션",
+						"추리",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/business_proposal.png",
+					"alt": "밥친구 2",
+					"keywords": [
+						"사내맞선",
+						"로맨스",
+						"로맨스코미디",
+						"달달",
+						"가볍게 보기",
+						"케미",
+						"힐링",
+						"연애",
+						"주말 추천",
+						"직장 로맨스"
+					]
+				},
+				{
+					"image": "/assets/crime_scene_zero.png",
+					"alt": "밥친구 3",
+					"keywords": [
+						"크라임씬",
+						"추리",
+						"예능",
+						"두뇌 싸움",
+						"리얼리티",
+						"범죄",
+						"방탈출",
+						"팀 미션",
+						"스릴러",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/i_am_solo.png",
+					"alt": "밥친구 4",
+					"keywords": [
+						"나는 솔로",
+						"연애",
+						"리얼리티",
+						"데이트",
+						"케미",
+						"솔로나라",
+						"가볍게 보기",
+						"로맨스",
+						"주말 추천",
+						"관찰 예능"
+					]
+				},
+				{
+					"image": "/assets/mr_sunshine.png",
+					"alt": "밥친구 5",
+					"keywords": [
+						"미스터 션샤인",
+						"사극",
+						"멜로",
+						"명대사",
+						"로맨스",
+						"스릴러",
+						"김태리",
+						"이병헌",
+						"감동",
+						"복수"
+					]
+				},
+				{
+					"image": "/assets/sky_castle.png",
+					"alt": "밥친구 6",
+					"keywords": [
+						"스카이 캐슬",
+						"드라마",
+						"풍자",
+						"블랙코미디",
+						"입시",
+						"상류층",
+						"스릴러",
+						"복수",
+						"명작",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/the_glory.png",
+					"alt": "밥친구 7",
+					"keywords": [
+						"더 글로리",
+						"복수",
+						"송혜교",
+						"스릴러",
+						"로맨스",
+						"학폭",
+						"김은숙",
+						"명대사",
+						"케미",
+						"드라마"
+					]
+				},
+				{
+					"image": "/assets/truman_show.png",
+					"alt": "밥친구 8",
+					"keywords": [
+						"트루먼 쇼",
+						"영화",
+						"명작",
+						"철학",
+						"리얼리티",
+						"풍자",
+						"감동",
+						"스릴러",
+						"케미",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/vincenzo.png",
+					"alt": "밥친구 9",
+					"keywords": [
+						"빈센조",
+						"송중기",
+						"다크 코미디",
+						"로펌",
+						"브로맨스",
+						"복수",
+						"로맨스",
+						"명작",
+						"스릴러",
+						"케미"
+					]
+				}
+			]
+		},
+		{
+			"id": "watching",
+			"title": ".님이 시청 중인 콘텐츠",
+			"items": [
+				{
+					"image": "/assets/emily_in_paris.png",
+					"alt": "시청 중인 콘텐츠 1",
+					"keywords": [
+						"에밀리 인 파리",
+						"로맨스",
+						"코미디",
+						"패션",
+						"힐링",
+						"연애",
+						"주말 추천",
+						"달달",
+						"명작",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/exhuma.png",
+					"alt": "시청 중인 콘텐츠 2",
+					"keywords": [
+						"파묘",
+						"스릴러",
+						"공포",
+						"범죄",
+						"추리",
+						"주말 추천",
+						"긴장감",
+						"명작",
+						"케미",
+						"복수"
+					]
+				},
+				{
+					"image": "/assets/gossip_girl.png",
+					"alt": "시청 중인 콘텐츠 3",
+					"keywords": [
+						"가십걸",
+						"로맨스",
+						"드라마",
+						"청춘",
+						"상류층",
+						"주말 추천",
+						"힐링",
+						"명작",
+						"케미",
+						"연애"
+					]
+				},
+				{
+					"image": "/assets/mean_girls.png",
+					"alt": "시청 중인 콘텐츠 4",
+					"keywords": [
+						"퀸카로 살아남는 법",
+						"코미디",
+						"청춘",
+						"하이틴",
+						"로맨스",
+						"주말 추천",
+						"명작",
+						"힐링",
+						"케미",
+						"연애"
+					]
+				},
+				{
+					"image": "/assets/otis_secret_counseling_office.png",
+					"alt": "시청 중인 콘텐츠 5",
+					"keywords": [
+						"오티스의 비밀 상담소",
+						"로맨스",
+						"코미디",
+						"청춘",
+						"힐링",
+						"연애",
+						"주말 추천",
+						"명작",
+						"케미",
+						"달달"
+					]
+				},
+				{
+					"image": "/assets/spring_of_seoul.png",
+					"alt": "시청 중인 콘텐츠 6",
+					"keywords": [
+						"서울의 봄",
+						"드라마",
+						"역사",
+						"감동",
+						"명작",
+						"복수",
+						"스릴러",
+						"주말 추천",
+						"케미",
+						"긴장감"
+					]
+				},
+				{
+					"image": "/assets/the_legend_of_the_blue_sea.png",
+					"alt": "시청 중인 콘텐츠 7",
+					"keywords": [
+						"푸른 바다의 전설",
+						"로맨스",
+						"판타지",
+						"이민호",
+						"전지현",
+						"달달",
+						"명작",
+						"연애",
+						"힐링",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/xo_kitty.png",
+					"alt": "시청 중인 콘텐츠 8",
+					"keywords": [
+						"XO 키티",
+						"로맨스",
+						"청춘",
+						"달달",
+						"하이틴",
+						"연애",
+						"힐링",
+						"명작",
+						"케미",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/kpop_demon_hunters_sing_along.png",
+					"alt": "시청 중인 콘텐츠 9",
+					"keywords": [
+						"케이팝 데몬 헌터즈",
+						"음악",
+						"판타지",
+						"애니메이션",
+						"액션",
+						"명작",
+						"청춘",
+						"주말 추천",
+						"케미",
+						"힐링"
+					]
+				},
+				{
+					"image": "/assets/signal.png",
+					"alt": "시청 중인 콘텐츠 10",
+					"keywords": [
+						"시그널",
+						"범죄",
+						"스릴러",
+						"추리",
+						"타임슬립",
+						"김혜수",
+						"이제훈",
+						"명작",
+						"복수",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/i_am_solo_love_continues.png",
+					"alt": "시청 중인 콘텐츠 11",
+					"keywords": [
+						"나는 솔로 사랑은 계속된다",
+						"연애",
+						"리얼리티",
+						"데이트",
+						"솔로나라",
+						"케미",
+						"힐링",
+						"주말 추천",
+						"로맨스",
+						"가볍게 보기"
+					]
+				},
+				{
+					"image": "/assets/black_white_cook.png",
+					"alt": "시청 중인 콘텐츠 12",
+					"keywords": [
+						"흑백요리사",
+						"요리",
+						"예능",
+						"리얼리티",
+						"먹방",
+						"힐링",
+						"주말 추천",
+						"웃긴 예능",
+						"케미",
+						"명작"
+					]
+				}
+			]
+		},
+		{
+			"id": "today-content",
+			"title": "회원님을 위해 엄선한 오늘의 콘텐츠",
+			"items": [
+				{
+					"image": "/assets/exit.png",
+					"alt": "오늘의 콘텐츠 1",
+					"keywords": [
+						"엑시트",
+						"코미디",
+						"재난",
+						"조정석",
+						"윤아",
+						"웃긴 예능",
+						"주말 추천",
+						"감동",
+						"케미",
+						"명작"
+					]
+				},
+				{
+					"image": "/assets/goblin.png",
+					"alt": "오늘의 콘텐츠 2",
+					"keywords": [
+						"도깨비",
+						"로맨스",
+						"판타지",
+						"공유",
+						"김고은",
+						"명대사",
+						"감동",
+						"명작",
+						"힐링",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/her_private_life.png",
+					"alt": "오늘의 콘텐츠 3",
+					"keywords": [
+						"그녀의 사생활",
+						"로맨스",
+						"코미디",
+						"아이돌",
+						"팬덤",
+						"달달",
+						"가볍게 보기",
+						"힐링",
+						"케미",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/love_naggers.png",
+					"alt": "오늘의 콘텐츠 4",
+					"keywords": [
+						"연애의 참견",
+						"연애",
+						"리얼리티",
+						"관찰 예능",
+						"조언",
+						"로맨스",
+						"주말 추천",
+						"웃긴 예능",
+						"힐링",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/moon_lovers.png",
+					"alt": "오늘의 콘텐츠 5",
+					"keywords": [
+						"달의 연인",
+						"보보경심",
+						"사극",
+						"로맨스",
+						"이준기",
+						"아이유",
+						"멜로",
+						"명작",
+						"감동",
+						"주말 추천",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/squid_game.png",
+					"alt": "오늘의 콘텐츠 6",
+					"keywords": [
+						"오징어 게임",
+						"스릴러",
+						"생존",
+						"액션",
+						"넷플릭스 오리지널",
+						"명작",
+						"복수",
+						"긴장감",
+						"주말 추천",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/the_world_of_the_married.png",
+					"alt": "오늘의 콘텐츠 7",
+					"keywords": [
+						"부부의 세계",
+						"드라마",
+						"불륜",
+						"복수",
+						"명작",
+						"감정선",
+						"스릴러",
+						"로맨스",
+						"케미",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/when_the_phone_rings.png",
+					"alt": "오늘의 콘텐츠 8",
+					"keywords": [
+						"지금 거신 전화는",
+						"스릴러",
+						"범죄",
+						"추리",
+						"공포",
+						"명작",
+						"긴장감",
+						"복수",
+						"주말 추천",
+						"케미"
+					]
+				}
+			]
+		}
+	],
+	"top10": [
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "1" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "2" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "3" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "4" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "5" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "6" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "7" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "8" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "9" },
+		{ "image": "/assets/kpop_demon_hunters.png", "alt": "10" }
+	]
+}
