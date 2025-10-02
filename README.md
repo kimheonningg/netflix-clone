@@ -38,6 +38,12 @@ This server will open at `http://localhost:3000`
 
 - API testing is done via `Postman`
 
+#### Script to start both projects at once
+
+```bash
+sh ./start-all.sh # at root directory
+```
+
 ### Checkpoint
 
 #### HW 4
