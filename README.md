@@ -63,6 +63,8 @@ This project will open at `http://localhost:5173`
 
 - carousel next/prev 기능 점검
 
+- 없어진 재생 / 상세 정보 버튼 복구
+
 - NOTE
   - class 문법 사용 x, use only functions
 

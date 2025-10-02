@@ -25,7 +25,27 @@
 				<a href="#">언어별로 찾아보기</a>
 			</nav>
 			<div class="icons">
-				<button class="icon-btn" aria-label="검색"></button>
+				<div class="search-wrap" data-state="collapsed">
+					<button
+						class="icon-btn search-toggle"
+						aria-label="검색"
+						aria-expanded="false"
+					>
+						<span class="material-symbols-outlined">search</span>
+					</button>
+
+					<div class="search-box" role="search">
+						<span class="material-symbols-outlined search-icon">search</span>
+						<input
+							id="site-search"
+							class="search-input"
+							type="text"
+							placeholder="제목, 사람, 장르"
+							aria-label="검색 입력"
+							autocomplete="off"
+						/>
+					</div>
+				</div>
 				<div class="icon-btn notif" aria-label="알림">
 					<span class="material-symbols-outlined">notifications</span>
 					<div class="notif-dropdown"><ul></ul></div>
