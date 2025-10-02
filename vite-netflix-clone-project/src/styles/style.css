@@ -298,7 +298,7 @@ body {
 			rgba(0, 0, 0, 0.35) 40%,
 			rgba(0, 0, 0, 0) 70%
 		),
-		url("/assets/runningman.png") center / cover no-repeat; /* 경로 수정 */
+		url("/assets/runningman.png") center / cover no-repeat;
 	z-index: 0;
 }
 .hero__inner {
@@ -311,6 +311,54 @@ body {
 }
 .hero-content {
 	max-width: 600px;
+}
+
+.hero-buttons {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 20px;
+}
+
+.hero-buttons .btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	border: 0;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 700;
+	letter-spacing: 0.2px;
+	transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease,
+		color 0.15s ease;
+	line-height: 1;
+}
+
+.hero-buttons .btn .material-symbols-outlined {
+	font-size: 24px;
+}
+
+.hero-buttons .btn-play {
+	background: #fff;
+	color: #000;
+	padding: 14px 22px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+.hero-buttons .btn-play:hover {
+	transform: translateY(-1px);
+	background: #eaeaea;
+	box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+.hero-buttons .btn-info {
+	background: rgba(109, 109, 110, 0.7);
+	color: #fff;
+	padding: 14px 18px;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.hero-buttons .btn-info:hover {
+	transform: translateY(-1px);
+	background: rgba(109, 109, 110, 0.9);
 }
 .rank {
 	font-size: 18px;
