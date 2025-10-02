@@ -30,7 +30,7 @@ async function initializeApp() {
 
 		initLikeButtons();
 
-		initSearchToggle();
+		initSearchToggle(data);
 	} catch (error) {
 		document.body.innerHTML = `<h1>페이지 로딩 중 오류가 발생했습니다.</h1>`;
 	}

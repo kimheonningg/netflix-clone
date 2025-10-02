@@ -1,4 +1,34 @@
-export function initSearchToggle() {
+import type { AppData, ContentItem } from "../../types/types";
+import { renderCarousels, renderSearchResults } from "../render/render";
+
+// normalization
+const norm = (s: string) =>
+	s.toLowerCase().normalize("NFKD").replace(/\s+/g, " ").trim();
+
+// if item matches
+function matches(item: ContentItem, qn: string): boolean {
+	if (!qn) return false;
+	if (item.keywords) {
+		return item.keywords.some((kw) => norm(kw).includes(qn));
+	}
+	return false;
+}
+
+// delete duplicates
+function dedupe(items: ContentItem[]): ContentItem[] {
+	const seen = new Set<string>();
+	const out: ContentItem[] = [];
+	for (const it of items) {
+		const key = `${it.image}|${it.alt}`;
+		if (!seen.has(key)) {
+			seen.add(key);
+			out.push(it);
+		}
+	}
+	return out;
+}
+
+export function initSearchToggle(appData?: AppData) {
 	const wrap = document.querySelector<HTMLDivElement>(".search-wrap");
 	const toggleBtn = document.querySelector<HTMLButtonElement>(".search-toggle");
 	const input = document.querySelector<HTMLInputElement>(".search-input");
@@ -43,5 +73,27 @@ export function initSearchToggle() {
 		if (expanded && input.value.trim() === "") {
 			setTimeout(collapse, 0);
 		}
+	});
+
+	// When search string is entered
+	input.addEventListener("input", () => {
+		const q = input.value;
+
+		if (!appData) return;
+
+		const qn = norm(q);
+		if (!qn) {
+			// empty search
+			renderCarousels(appData.carousels);
+			return;
+		}
+
+		const all: ContentItem[] = [
+			...appData.carousels.flatMap((c) => c.items),
+			...appData.top10,
+		];
+
+		const matched = dedupe(all.filter((it) => matches(it, qn)));
+		renderSearchResults(matched, q);
 	});
 }
