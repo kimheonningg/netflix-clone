@@ -385,17 +385,138 @@
 			]
 		},
 		{
-			"id": "romance",
-			"title": "연애 세포를 깨우는 작품들",
+			"id": "today-content",
+			"title": "회원님을 위해 엄선한 오늘의 콘텐츠",
 			"items": [
-				{ "image": "/assets/runningman.png", "alt": "연애 작품 1" },
-				{ "image": "/assets/business_proposal.png", "alt": "연애 작품 2" },
-				{ "image": "/assets/crime_scene_zero.png", "alt": "연애 작품 3" },
-				{ "image": "/assets/i_am_solo.png", "alt": "연애 작품 4" },
-				{ "image": "/assets/mr_sunshine.png", "alt": "연애 작품 5" },
-				{ "image": "/assets/sky_castle.png", "alt": "연애 작품 6" },
-				{ "image": "/assets/the_glory.png", "alt": "연애 작품 7" },
-				{ "image": "/assets/truman_show.png", "alt": "연애 작품 8" }
+				{
+					"image": "/assets/exit.png",
+					"alt": "오늘의 콘텐츠 1",
+					"keywords": [
+						"엑시트",
+						"코미디",
+						"재난",
+						"조정석",
+						"윤아",
+						"웃긴 예능",
+						"주말 추천",
+						"감동",
+						"케미",
+						"명작"
+					]
+				},
+				{
+					"image": "/assets/goblin.png",
+					"alt": "오늘의 콘텐츠 2",
+					"keywords": [
+						"도깨비",
+						"로맨스",
+						"판타지",
+						"공유",
+						"김고은",
+						"명대사",
+						"감동",
+						"명작",
+						"힐링",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/her_private_life.png",
+					"alt": "오늘의 콘텐츠 3",
+					"keywords": [
+						"그녀의 사생활",
+						"로맨스",
+						"코미디",
+						"아이돌",
+						"팬덤",
+						"달달",
+						"가볍게 보기",
+						"힐링",
+						"케미",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/love_naggers.png",
+					"alt": "오늘의 콘텐츠 4",
+					"keywords": [
+						"연애의 참견",
+						"연애",
+						"리얼리티",
+						"관찰 예능",
+						"조언",
+						"로맨스",
+						"주말 추천",
+						"웃긴 예능",
+						"힐링",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/moon_lovers.png",
+					"alt": "오늘의 콘텐츠 5",
+					"keywords": [
+						"달의 연인",
+						"보보경심",
+						"사극",
+						"로맨스",
+						"이준기",
+						"아이유",
+						"멜로",
+						"명작",
+						"감동",
+						"주말 추천",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/squid_game.png",
+					"alt": "오늘의 콘텐츠 6",
+					"keywords": [
+						"오징어 게임",
+						"스릴러",
+						"생존",
+						"액션",
+						"넷플릭스 오리지널",
+						"명작",
+						"복수",
+						"긴장감",
+						"주말 추천",
+						"케미"
+					]
+				},
+				{
+					"image": "/assets/the_world_of_the_married.png",
+					"alt": "오늘의 콘텐츠 7",
+					"keywords": [
+						"부부의 세계",
+						"드라마",
+						"불륜",
+						"복수",
+						"명작",
+						"감정선",
+						"스릴러",
+						"로맨스",
+						"케미",
+						"주말 추천"
+					]
+				},
+				{
+					"image": "/assets/when_the_phone_rings.png",
+					"alt": "오늘의 콘텐츠 8",
+					"keywords": [
+						"지금 거신 전화는",
+						"스릴러",
+						"범죄",
+						"추리",
+						"공포",
+						"명작",
+						"긴장감",
+						"복수",
+						"주말 추천",
+						"케미"
+					]
+				}
 			]
 		}
 	],
