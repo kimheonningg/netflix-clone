@@ -9,6 +9,8 @@
 
 ### How to run this project
 
+#### Vite frontend
+
 ```bash
 # move to the project directory
 cd vite-netflix-clone-project
@@ -21,6 +23,20 @@ npm run dev
 ```
 
 This project will open at `http://localhost:5173`
+
+#### Express Backend
+
+```bash
+# move to the server directory
+cd server
+
+# install dependencies if needed
+npm install
+```
+
+This server will open at `http://localhost:3000`
+
+- API testing is done via `Postman`
 
 ### Checkpoint
 
