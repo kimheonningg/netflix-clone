@@ -8,6 +8,12 @@ import type {
 import { repaintLikes } from "../components/handleLikes";
 
 // Hero
+function showHero(show: boolean) {
+	const hero = document.querySelector<HTMLElement>(".hero");
+	if (!hero) return;
+	hero.style.display = show ? "flex" : "none";
+}
+
 export function renderHero(data: HeroData) {
 	const heroSection = document.querySelector<HTMLElement>(".hero");
 	const rankEl = document.querySelector(".hero-content .rank");
@@ -70,6 +76,7 @@ export function renderCarousels(
 
 	if (!opts?.skipClear) {
 		clearCarousels();
+		showHero(true);
 	}
 
 	data.forEach((carousel) => {
@@ -166,6 +173,7 @@ export function renderSearchResults(items: ContentItem[], query: string) {
 	const mountParent = top10Section?.parentNode as ParentNode | null;
 
 	clearCarousels();
+	showHero(false);
 
 	if (!items.length) {
 		if (mountParent) {
@@ -182,6 +190,8 @@ export function renderSearchResults(items: ContentItem[], query: string) {
 	const section = document.createElement("section");
 	section.className = "carousel-row";
 	section.setAttribute("data-carousel", "search-inline");
+
+	section.style.marginTop = "100px";
 
 	const cardsHtml = items
 		.map(
