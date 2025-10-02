@@ -36,7 +36,7 @@ This project will open at `http://localhost:5173`
 
 #### HW 5
 
-- HW 4에서의 구현 보완- carousel 왼쪽 클릭 기능 fix: card hover 시 card가 커지면서 왼쪽 `<`가 클릭되지 않는 버그 발견
+- HW 4에서의 구현 보완- carousel 왼쪽 클릭 기능 fix: card hover 시 card가 커지면서 왼쪽 `<`가 클릭되지 않는 버그 발견 V
 
 - 1. 검색 기능 구현
 
