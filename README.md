@@ -62,11 +62,12 @@ This server will open at `http://localhost:3000`
 
 - 2. 서버 응답
 
-  - `server` 디렉토리 생성하기
-  - Express 환경 구성: `npm install express`
-  - Server port는 3000으로 설정 후 config file에 proxy 추가
-  - 1초 지연: `setTimeout`
-  - Use `fetch ... then` syntax
+  - `server` 디렉토리 생성하기 V
+  - Express 환경 구성: `npm install express` V
+  - Server port는 3000으로 설정 후 config file에 proxy 추가 V
+  - 1초 지연: `setTimeout` V
+  - Use `fetch ... then` syntax V
+  - Code migration
 
 - 3. 검색창과 최근검색어 기능 (선택- 시간 되면)
 

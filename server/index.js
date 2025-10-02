@@ -12,9 +12,10 @@ app.use(express.json());
 // Function to set delay
 const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
-app.get("/test/version", async (req, res) => {
-	await delay(1000);
-	res.json({ version: version });
+app.get("/test/version", (req, res) => {
+	delay(1000).then(() => {
+		res.json({ version: version });
+	});
 });
 
 app.listen(PORT, () => {
