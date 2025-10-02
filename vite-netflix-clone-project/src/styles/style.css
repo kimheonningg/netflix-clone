@@ -124,6 +124,69 @@ body {
 	color: rgba(255, 255, 255, 0.75);
 }
 
+.recent-layer {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+	margin-top: 8px;
+	margin-left: 24px;
+	background: rgba(20, 20, 20, 0.95);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 8px;
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+	display: none;
+	z-index: 50;
+	overflow: hidden;
+}
+
+.recent-layer[data-open="true"] {
+	display: block;
+}
+
+.recent-list {
+	list-style: none;
+	margin: 0;
+	padding: 6px 0;
+}
+.recent-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 10px 14px;
+	cursor: pointer;
+	color: #e6e6e6;
+	font-size: 14px;
+}
+.recent-item:hover,
+.recent-item.active {
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.recent-text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.recent-remove {
+	border: 0;
+	background: transparent;
+	color: #aaa;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+.recent-remove:hover {
+	color: #fff;
+}
+.recent-empty {
+	padding: 12px 14px;
+	color: #9aa0a6;
+	font-size: 13px;
+}
+
 .notif {
 	position: relative;
 }
