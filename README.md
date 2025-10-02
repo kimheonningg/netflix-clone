@@ -5,7 +5,7 @@
 ### Branch info
 
 - feature : 과제 2 & 3 개발용
-- feature-vite : 과제 4 개발용
+- feature-vite : 과제 4 & 5 개발용
 
 ### How to run this project
 
@@ -92,8 +92,9 @@ sh ./start-all.sh # at root directory
 - Use `fetch ... then` syntax
 - carousel next/prev 기능 점검
 
-- NOTE
-  - class 문법 사용 x, use only functions
+#### NOTE
+
+- class 문법 사용 x, use only functions
 
 ### 개발 노트
 
