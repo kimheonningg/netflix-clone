@@ -329,3 +329,86 @@ Top10 섹션은 `<footer>` tag로 써야 했었던 것 같은데, Top10 섹션�
 간단히 설명하자면, 실제 내 데이터가 `n`개가 있다면, 그 데이터의 앞 뒤로 똑같은 데이터를 복사하여 총 `3n` 길이의 배열을 만들어 캐러셀을 조작하는 것이다. 또, 실제 데이터는 `[n, ... 2n-1]` index에 있고 가상의 데이터가 `[0, ... n-1]`, `[2n, ... 3n-1]` 부분에 있기 때문에, 현재 focus 된 카드의 index가 가상의 데이터 index로 넘어간다면, corresponding하는 실제 데이터의 index로 다시 mapping해주는 방식으로 "무한" 캐러셀을 구현했다. 이 과정에서 자연스러운 에니메이션은 css의 `transition`을 사용했다.
 
 카드 개수가 달라도, 한 페이지에 몇 개를 보여주고 이에 해당하는 pagination bar의 개수는 몇 개가 있으면 좋을지 동적으로 계산하는 로직도 `app.js` Javascript 코드에 추가하였다.
+
+## 4주차- Vite로의 migration 및 fetch 데이터 통신
+
+4주차에서는 Vite로의 migration, fetch API 적용, 좋아요 버튼 구현이 메인 과제였다.
+
+아래는 내 체크리스트이다.
+
+```plaintext
+- init vite project V
+- code migration V
+- 2.1 use fetch API to render card content V
+- 2.2 like button (locally store info) V
+- 2.3 mock server ?
+- Fix card carousel functionality: 옆으로 스크롤해도 card 안보이게 하기 V
+- (Z index 조절) card hover 시 pagination bar 안보이도록 수정 V
+```
+
+Vite가 뭔지 대충 알기는 했으나, 사용한 것은 처음이라 신선했다. 처음 init을 했을 때, 다른 프레임워크나 빌드 도구와 달리 디렉토리 구조가 비교적 단순하게 되어 있어서 놀랐다. 이전에 사용했던 빌드 도구로는 `Webpack`이 있었는데, init 시 아마 뭐가 잔뜩 깔렸었던 것 같다.
+
+구조가 단순했기에 이전의 코드를 쉽게 migration할 수 있었고, 앞으로 프로젝트가 커질 것을 대비하여 디렉토리 구조를 정리하였다.
+
+4주차까지는 많은 기능이 없었기에 한 디렉토리에 한 파일만 들어갔음에도, 훗날의 유지\*보수의 편리성을 위해 미리 프로젝트 구조를 나누어 준비하였다.
+
+[이 문서](../CODE_NOTES.md)에 역시 자세한 디렉토리 설명을 정리해놨다.
+
+간략하게, Typescript 파일을 `script` 디렉토리 안에 넣었고, `script` 디렉토리는 다시 `api`, `components`, `render`로 나눠진다. `api`에는 API handling, `components`에는 UI에서 일어나는 여러 action들 (대부분의 파일은 여기에 속함), `render`에는 UI 렌더링 관련된 파일들을 모아둘 용도로 설계했다.
+
+이 모든 Typescript 파일들은 `main.ts`에서 불러 온 후 실행한다.
+
+```typescript
+async function initializeApp() {
+	try {
+		// all functions are called here
+	} catch (error) {
+		document.body.innerHTML = `<h1>페이지 로딩 중 오류가 발생했습니다.</h1>`;
+	}
+}
+document.addEventListener("DOMContentLoaded", initializeApp);
+```
+
+그 외에도 `types`에는 data fetching, rendering 시 유용한 type들을 모두 정의해 두기 위해 만든 directory이다. 프로젝트가 커지면 `types` 디렉토리 안에 용도 별로 type들을 별도의 Typescript 파일로 만들어줘야 겠지만, 현재는 그럴 필요성을 못느꼈기에 `types.ts`에 모든 type들을 다 넣어주었다. (훗날 필요시 리팩토링할 예정이다.)
+
+`styles` 디렉토리에는 `styles.css` 파일을 넣을 용도로 만들어주었다. 이 CSS 파일이 너무 길어져 파일을 분리할 필요성이 생기면 `styles` 디렉토리 안에 여러 CSS 파일로 분리하겠지만, 수업 시간에도 그럴 필요가 없다고 들은 것 같기 때문에 일단은 `styles.css` 하나의 파일로 두고자 한다.
+
+좋아요 기능은 `components/handleLikes.ts`에 구현하였다. `"netflix-liked-items"`이라는 Localstorage key를 만들어, 해당하는 local storage에 관련 정보들을 저장하고자 했다. 이 Typescript 파일의 각 함수들은 아래의 기능을 하고, 이 또한 [이 문서](../CODE_NOTES.md)에서 확인할 수 있다.
+
+- `getLikedItems()`
+- `saveLikedItems()`
+- `toggleLike()` : Change to like if currently unliked, and vice versa.
+- `repaintLikes()` : Update UI whenever refreshing or DOM is updated
+- `initLikeButtons()` : Register click events (Initialize event listeners) -> used whenever the user clicks
+
+[트러블슈팅 문서](../TROUBLESHOOTING_NOTES.md)에 자세히 정리했어야 했는데 (~~시간이 되면 할 예정~~) 좋아요 기능이 단순해 보였는데 엄청 많은 시간이 소요됐었다. 그 원인은, 좋아요를 눌러도 화면에 UI가 반영되지 않는 문제가 있었기 때문이었다.
+
+처음에는 Typescript 문제라고 생각해서, 모든 function에 `console.log`를 구현해서 확인했으나, 모든 기능이 잘 된다는 것을 깨닫고 많은 고민을 했었다.
+
+결국 알게된 사실은 CSS 우선순위 문제였다. 초록색으로 like를 표시해야 하는데, 더 높은 우선순위의 디자인이 이 초록색으로 바뀌는 기능을 덮어쓰고 있어서 화면 상에 보이지 않았던 것이다. CSS는 많은 비율을 AI로 관리하고 있기 때문에 이런 문제가 생겼던 것 같다. 이것을 계기로 나는 내 CSS 코드를 다시 읽어보며 혹시 potential한 문제는 없을지 점검하기도 했다. (~~CSS가 제일 어렵다~~)
+
+데이터를 fetch해서 가져오는 기능은 처음에는 신기했다. 항상 backend API를 호출하여 데이터를 가져오는 것만 해봤기 때문에, frontend에 저장된 static한 파일들을 불러올 수 있다는 사실 자체가 신선했기 때문이다.
+
+```typescript
+import dataUrl from "../../data.json?url";
+import type { AppData } from "../../types/types";
+
+export async function fetchNetflixData(): Promise<AppData> {
+	// Previous code fetching data from the frontend
+	try {
+		const response = await fetch(dataUrl);
+		if (!response.ok) {
+			throw new Error(`HTTP Error! Status: ${response.status}`);
+		}
+		const data: AppData = await response.json();
+		return data;
+	} catch (error) {
+		console.error("데이터를 가져오는 데 실패했습니다:", error);
+		throw error;
+	}
+}
+```
+
+위 코드에서, AI에 의하면, `dataUrl`은 Vite가 빌드 시 JSON 파일을 static asset으로 처리해주는 경로라고 한다. 즉, 이 `data.json`은 같은 domain (`localhost:5173`)의 Vite Dev Server에서 직접 불러오는 것이라고 한다.
+
+4주차 과제를 통해 상태 저장 -> DOM rendering -> event handling을 직접 경험할 수 있었다.
