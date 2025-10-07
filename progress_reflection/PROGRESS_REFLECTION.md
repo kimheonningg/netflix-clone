@@ -411,4 +411,136 @@ export async function fetchNetflixData(): Promise<AppData> {
 
 위 코드에서, AI에 의하면, `dataUrl`은 Vite가 빌드 시 JSON 파일을 static asset으로 처리해주는 경로라고 한다. 즉, 이 `data.json`은 같은 domain (`localhost:5173`)의 Vite Dev Server에서 직접 불러오는 것이라고 한다.
 
+이때 `data.json`을 불러오는 것이 익숙하지 않기도 해서, 아래의 test code를 `scripts/api/fetchTest.ts`에 만들어 그 원리를 이해하고자 했다. (당연히 프로젝트 내부에서 아래 코드를 사용하지는 않는다.)
+
+```typescript
+import dataUrl from "../data.json?url";
+
+export async function checkFetch() {
+	try {
+		const response = await fetch(dataUrl);
+		if (!response.ok) {
+			throw new Error(`HTTP 에러! 상태: ${response.status}`);
+		}
+		const data = await response.json();
+
+		console.log("fetch 성공!", data);
+
+		return data;
+	} catch (error) {
+		console.error("fetch 실패!", error);
+	}
+}
+```
+
 4주차 과제를 통해 상태 저장 -> DOM rendering -> event handling을 직접 경험할 수 있었다.
+
+## 5주차- Express server 연동 및 search feature 추가
+
+5주차에서는 Express로 server를 만들고, 검색 기능을 구현하고 최근검색어를 저장하는 것이 메인 과제였다.
+
+아래는 내 체크리스트이다.
+
+(5주차부터 체크리스트를 얼마나 자세하게 적어야 하는지 감을 잡은 것 같다. 그 전까지는 체크리스트가 되게 빈약했는데, 사실 세부 테스크 나누는 법이 안익숙했던 것 같다.)
+
+```plaintext
+
+- HW 4에서의 구현 보완- carousel 왼쪽 클릭 기능 fix: card hover 시 card가 커지면서 왼쪽 `<`가 클릭되지 않는 버그 발견 V
+
+- 1. 검색 기능 구현
+
+  - 더 많은 Netflix 컨텐츠 가저오기 (풍성한 검색어를 구현하기 위함) V
+  - `data.json`에 연관검색어 데이터도 추가해서, 검색 시 연관검색어와 매칭하고 보여주도록 하자. V
+
+- 2. 서버 응답
+
+  - `server` 디렉토리 생성하기 V
+  - Express 환경 구성: `npm install express` V
+  - Server port는 3000으로 설정 후 config file에 proxy 추가 - currently not working
+  - 1초 지연: `setTimeout` V
+  - Use `fetch ... then` syntax - 현재 `async` / `await` 사용 중
+  - Code migration V
+
+- 3. 검색창과 최근검색어 기능 (선택- 시간 되면)
+
+  - focus 시 최근검색어 레이어 노출 V
+  - 최근검색어 최대 5개까지 보여주도록: `localStorage` 사용 V
+  - 방향키로 최근 검색어 목록 선택할 수 있도록 V
+  - 검색창 애니메이션- 돋보기 아이콘 누를 때 검색창이 애니메이션 효과로 가로로 확대되도록 V
+
+- 설계서 작성하기
+
+- 없어진 재생 / 상세 정보 버튼 복구 V
+```
+
+5주차에는 연휴도 있었기에 그 전까지 있었던 버그들도 되짚어보면서 고치도록 노력했다.
+
+먼저 Express 세팅하고 frontend-backend 간의 통신을 API로 구현하는 것은 나에게는 4주차의 fetch API와 비교했을 때 비교적 덜 어려웠다.
+
+Express를 세팅한 뒤, 아래의 test API를 만든 후, 항상 backend server testing 시 사용하는 Postman으로 이 백엔드 서버가 돌아가고 있는지 확인해주었다.
+
+```javascript
+app.get("/test/version", (req, res) => {
+	delay(1000).then(() => {
+		res.json({ version: version });
+	});
+});
+```
+
+위 코드는 `server/index.js`에 정의된 코드 일부이다.
+
+내 넷플릭스 데이터는 모두 `netflix-data.json` 파일에 정의해주었고, 프런트에서 호출 시 이 JSON 파일을 모두 리턴하도록 백앤드 코드는 단순하게 짜주었다.
+
+검색결과 노출 기능 구현을 위해서 원래 하나의 사진을 여러 번 썼던 프로젝트인데, 여러 개의 사진을 다 추가해주었다. 이는 검색 기능을 풍부하게 해주기 위함이었다. (~~또 많은 시간이 소요되기도 했다.~~)
+
+AI를 이용하여, 연관검색어를 array 형태로 생성해주었다. 즉, 검색 시 연관검색어와 조금이라도 매칭되는 단어가 있으면 그 사진을 UI에 띄워주도록 만들어주었다. AI에게 각 image의 `keywords`에 겹치는 단어들도 많이 넣어서, 검색창에 검색 시 많은 image들이 띄워질 수 있도록 하였다.
+
+```json
+{
+	"image": "/assets/runningman.png",
+	"alt": "밥친구 1",
+	"keywords": [
+		"런닝맨",
+		"예능",
+		"유재석",
+		"버라이어티",
+		"웃긴 예능",
+		"주말 추천",
+		"리얼리티",
+		"팀 미션",
+		"추리",
+		"케미"
+	]
+},
+```
+
+검색 기능은 `scripts/components/search.ts`에 정의되어 있다.
+
+간략하게 설명하자면, `norm()`함수에서는 먼저 검색된 단어를 소문자화 한 후, `NFKD` 정규화를 시행하고, 공백도 모두 없애주었다.
+
+`matches()`함수는 `keywords` 배열을 traverse하면서 부분적으로 일치하는지 확인한다.
+
+이때 여러 개의 카드가 중복될 수 있는데, 화면에 중복된 카드의 렌더링을 방지하는 `dedupe()` 함수를 만들었다.
+
+최근검색어 기능은 localStorage를 활용하였다.
+
+```typescript
+const RECENT_KEY = "netflix-recent-searches";
+const RECENT_MAX = 5;
+```
+
+`"netflix-recent-searches"` 키를 갖는 local storage에, 최대 5개의 최근 검색어를 저장한다.
+
+이때, (넷플릭스와 동일하게) 입력이 하나라도 바뀔 때마다 일치하는 이미지들을 찾아서 화면에 보여주도록 했기 때문에, "최근 검색"의 정의 자체가 모호해진다. (즉, "추리"를 검색할 경우, "ㅊ"->"추"->"출"->"추리" 모두가 검색어가 된다.) 따라서 나는 엔터키를 누를 때마다 그것을 최근 검색으로 인식하도록 설정해주었다.
+
+키보드 에니메이션과 검색창이 확장되는 에니메이션 역시 모두 정의해 주었다.
+
+5주차에는 자잘한 기능들도 많이 추가했는데, 한 예로는 프런트 실행 후 백앤드 실행하는 과정이 귀찮아서, 이 모든 과정을 [이 파일](../start-all.sh)의 script로 만들기도 했다.
+
+이제 실행은 Root directory `/`로 가서, 아래의 명령어를 시행하면 된다.
+
+```bash
+sh ./start-all.sh # at root directory
+```
+
+그 외에, UI를 Netflix와 비슷하게 수정하거나 기존의 Javascript 기능들을 더 매끄럽게 시행되도록 수정하는 등의 작은 수정들도 진행하였다.
